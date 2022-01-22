@@ -23,9 +23,9 @@ for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
     counter = counter + 1
     episodes.append(data.get("href"))
 
-def ListEpisodes():
+def ListEpisodes(limit_real):
     counter = 0
-    for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
+    for data in soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real):
         counter = counter + 1
         print("Episode", colored(":", "cyan"), data.get("title"), "[", colored(counter, "cyan" ), "]")
             
@@ -77,7 +77,12 @@ if args == "--download" or args == "-d":
 
 # List function
 if args == "--list" or args == "-l":
-    ListEpisodes()
+    try:
+        args2 = int(args2)
+        ListEpisodes(args2)
+
+    except:
+        ListEpisodes(339)
 
 # Play function
 if args == "-p" or args == "--play":
@@ -92,7 +97,8 @@ if args == "-p" or args == "--play":
 if args == "-h" or args == "--help":
     print("""
     --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
-    --list | -l,     usage --list, this will list all the episodes and then exit the programm
+    --list | -l, usage --list, this will list all the episodes and then exit the programm
+    --list | -l, usage --list {number} this will show the number of episodes with the limit you provided.
     --play | -p      usage --play {a number of a episode}, This will play the episode without listing the episodes
     --help | -h      usage --help this will print what each argument does
     """)
@@ -101,19 +107,25 @@ real = ""
 
 # This is if no arguments were passed.
 if args == "  ":
-    ListEpisodes()
+    ListEpisodes(139)
     print(colored("No arguments were passed. Default settings applied.", "green"), "\n")
 
     while(True):
+        video_input = input("What episode do you want to watch? {type a number by the right side}: ")
+
         try:
-            video_input = int(input("What episode do you want to watch? {type a number by the right side}: "))
+            video_input = int(video_input)
 
         except:
+            if video_input == "exit" or video_input == "quit" or video_input == "close" or video_input == "q":
+                print("Quitting the programm!")
+                break
+
             print(colored("You need to type a number!", "red"))
             
             # This is the only way to force the real variable to be empty.
             video_input = 99999
-        
+            
         try:
             real = VideoSource(episodes[video_input - 1])
             print(colored("Now playing:", "green"), real, "\n")
