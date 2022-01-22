@@ -16,6 +16,7 @@ Watch classic spongebob from the terminal!
  --help | -h      usage --help this will print what each argument does
 ```
 # How to install:
+Download this repository with git or other.
 ```
 cd spongebob-cli
 sudo chmod +x spongebob-cli; sudo python setup.py install
