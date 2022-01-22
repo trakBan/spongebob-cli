@@ -17,6 +17,7 @@ Watch classic spongebob from the terminal!
 ```
 # How to install:
 ```
+cd spongebob-cli
 sudo chmod +x spongebob-cli; sudo python setup.py install
 ```
 # Troubleshooting
