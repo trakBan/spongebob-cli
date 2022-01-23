@@ -27,7 +27,7 @@ sudo chmod +x spongebob-cli; sudo python setup.py install
 
 If setup.py fails try this:
 ```
-pip3 install termcolor beautifulsoup4
+pip3 install termcolor beautifulsoup4 prettytable
 ```
 If video wont play check if you have mpv and youtube-dl installed.
 If you dont have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc and alias it to youtube-dl
