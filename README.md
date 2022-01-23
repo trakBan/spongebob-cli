@@ -7,6 +7,25 @@ Watch classic spongebob from the terminal!
 1.  mpv player https://mpv.io/
 2.  youtube-dl https://github.com/ytdl-org
 
+**Fedora**
+
+```
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install mpv
+```
+
+**Debian/Ubuntu**
+
+```
+sudo apt install mpv
+```
+
+**Arch**
+
+```
+sudo pacman -S mpv
+```
+
 # Usage:
 ```
  If the programm was ran without arguments it will ist all the episodes an it will let you play them.
@@ -18,15 +37,19 @@ Watch classic spongebob from the terminal!
 ```
 # How to install:
 Download this repository with git or other.
+
 ```
 cd spongebob-cli
-sudo chmod +x spongebob-cli; sudo python setup.py install
+chmod +x spongebob-cli && python setup.py install
 ```
+
 # Troubleshooting
 
 If setup.py fails try this:
+
 ```
 pip3 install termcolor beautifulsoup4
 ```
+
 If video wont play check if you have mpv and youtube-dl installed.
 If you dont have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc and alias it to youtube-dl
