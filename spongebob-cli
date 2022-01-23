@@ -2,20 +2,16 @@
 # This code is licensed under GNU General Public License v3.0. I encouruage you to do the same to the software you write!
 # TODO: --binge, --download-all
 
-from urllib.error import HTTPError
-
 
 try:
     from bs4 import BeautifulSoup
     import requests, subprocess, sys
     from termcolor import colored
+    from urllib.error import HTTPError
 
 except ImportError:
     # Using python color codes instead of termcolor if it isn't found
     print("\033[1;31;40mOne or more library is missing! Check the list of libraries!")
-    # Wait 10 seconds and then exit the application
-    import time
-    time.sleep(10)
     exit()
 
 episodes = []
@@ -27,11 +23,15 @@ try:
     link = "https://www.megacartoons.net/help-wanted/"
     raw = requests.get(link).text
     soup = BeautifulSoup(raw, "html.parser")
+
 except HTTPError as e:
+
     if e.code in [x for x in range(400, 499)]:
         print(colored(f"Client Error {e.code}. Please try again later."), "red")
+
     elif e.code in [x for x in range(500, 599)]:
         print(colored(f"Server Error {e.code}. Please try again later."), "red")
+
     else:
         print(colored(f"An error occured with status number of {e.code}"), "red")
 
@@ -130,7 +130,7 @@ elif args.replace(' ', '') in ["--help", "-h"]:
 else:
     try:
         real = ''
-        ListEpisodes(139)
+        ListEpisodes(339)
         print(colored("No arguments were passed. Default settings applied.", "green"), "\n")
 
         while(True):
