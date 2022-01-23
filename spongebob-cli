@@ -96,6 +96,10 @@ elif args.replace(' ', '') in ["--play", "-p"]:
     except:
         print(colored("No arguments were passed with the play function or the index is out of range, aborting...", "red"))
 
+elif args.replace('  ', '') in ['--update', "-u"]:
+    print(colored("This is higly experimental and only works if you have installed spongebob-cli with git clone command!", "red"))
+    sys.subprocess(["git", "fetch"])
+
 elif args.replace(' ', '') in ["--help", "-h"]:
     print("""
     --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
