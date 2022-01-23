@@ -53,8 +53,9 @@ def ListEpisodes(limit_real):
         episode_title.append(data.get("title"))
         episode_number.append(colored(counter, "cyan" ))
     
-    table.add_column("Episode", episode_number)
     table.add_column("Title", episode_title)
+    table.add_column("Episode", episode_number)
+    
     table.align["Title"] = "l"
     print(table)
 
