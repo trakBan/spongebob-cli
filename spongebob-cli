@@ -1,29 +1,46 @@
 #!/usr/bin/env python3
 # This code is licensed under GNU General Public License v3.0. I encouruage you to do the same to the software you write!
-# TODO: --binge, --download-all, --list {n:}
+# TODO: --binge, --download-all
 
 try:
     from bs4 import BeautifulSoup
     import requests, subprocess, sys
     from termcolor import colored
     from prettytable import PrettyTable
+    from urllib.error import HTTPError
 
 except ImportError:
-    print(colored("One or more library is missing! Check the list of libraries!", "red"))
+    # Using python color codes instead of termcolor if it isn't found
+    print("\033[1;31;40mOne or more library is missing! Check the list of libraries!")
+    exit()
 
 episodes = []
 counter = 0
 
-print(colored("Fetching episodes. This might take a while.", "green"))
 
 # It fetches the episodes from this link, So that episode is not avaliable.
-raw = requests.get("https://www.megacartoons.net/help-wanted/").text
-soup = BeautifulSoup(raw, "html.parser")
+try:
+    link = "https://www.megacartoons.net/help-wanted/"
+    raw = requests.get(link).text
+    soup = BeautifulSoup(raw, "html.parser")
+
+except HTTPError as e:
+
+    if e.code in [x for x in range(400, 499)]:
+        print(colored(f"Client Error {e.code}. Please try again later."), "red")
+
+    elif e.code in [x for x in range(500, 599)]:
+        print(colored(f"Server Error {e.code}. Please try again later."), "red")
+
+    else:
+        print(colored(f"An error occured with status number of {e.code}"), "red")
+
 
 for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
     counter += 1
     episodes.append(data.get("href"))
             
+
 
 def ListEpisodes(limit_real):
     counter = 0
@@ -56,8 +73,8 @@ def Play(DirectLink):
     try:
         subprocess.run(["mpv", DirectLink])
     
-    except:
-        print("An error occured while tying to play the video! Make sure you have youtube-dl and mpv installed.")
+    except :
+        print(colored("An error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
 
 def Download(source):
     try:
@@ -65,13 +82,12 @@ def Download(source):
         print(colored("Download complete!", "green"))
     
     except:
-        print("Downloading the video failed. Be sure to have youtube-dl installed.")
+        print(colored("Downloading the video failed. Be sure to have youtube-dl installed.", "red"))
 
 try:
     args = sys.argv[1]
-
 except IndexError:
-    args = '' 
+    args = " " 
 
 try:
     args2 = sys.argv[2]
@@ -108,43 +124,51 @@ elif args.replace(' ', '') in ["--play", "-p"]:
     except:
         print(colored("No arguments were passed with the play function or the index is out of range, aborting...", "red"))
 
+elif args.replace('  ', '') in ['--update', "-u"]:
+    print(colored("This is higly experimental and only works if you have installed spongebob-cli with git clone command!", "red"))
+    sys.subprocess(["git", "fetch"])
+
 elif args.replace(' ', '') in ["--help", "-h"]:
     print("""
     --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
     --list | -l, usage --list, this will list all the episodes and then exit the programm
     --list | -l, usage --list {number} this will show the number of episodes with the limit you provided.
-    --play | -p      usage --play {a number of a episode}, This will play the episode without listing the episodes
-    --help | -h      usage --help this will print what each argument does
+    --play | -p, usage --play {a number of a episode}, This will play the episode without listing the episodes
+    --help | -h, usage --help this will print what each argument does
     """)
 
 # This is if no arguments were passed.
 else:
-    real = ''
-    ListEpisodes(139)
-    print(colored("No arguments were passed. Default settings applied.", "green"), "\n")
+    try:
+        real = ''
+        ListEpisodes(339)
+        print(colored("No arguments were passed. Default settings applied.", "green"), "\n")
 
-    while(True):
-        video_input = input("What episode do you want to watch? (type a number by the right side): ").replace(' ', '')
+        while(True):
+            video_input = input("What episode do you want to watch? (type a number by the right side): ").replace(' ', '')
 
-        try:
-            video_input = int(video_input)
+            try:
+                video_input = int(video_input)
 
-        except:
-            if video_input.replace(' ', '') in ["exit", "quit", "close", 'q']:
-                print("Quitting the programm!")
-                sys.exit()
+            except:
+                if video_input.replace(' ', '') in ["exit", "quit", "close", 'q']:
+                    print("Quitting the programm!")
+                    sys.exit()
 
-            print(colored("You need to type a number!", "red"))
-            
-            # This is the only way to force the real variable to be empty.
-            video_input = 99999
-            
-        try:
-            real = VideoSource(episodes[video_input - 1])
-            print(colored("Now playing:", "green"), real, "\n")
-            Play(real)
+                print(colored("You need to type a number!", "red"))
+                
+                # This is the only way to force the real variable to be empty.
+                video_input = 99999
+                
+            try:
+                real = VideoSource(episodes[video_input - 1])
+                print(colored("Now playing:", "green"), real, "\n")
+                Play(real)
 
-        except:
-            print("The video you chose is out of range or doesnt exist")
-            real = ""
+            except:
+                print("The video you chose is out of range or doesnt exist")
+                real = ''
 
+    except KeyboardInterrupt:
+        print(colored("\nApplication interrupted.", "red"))
+        sys.exit()
