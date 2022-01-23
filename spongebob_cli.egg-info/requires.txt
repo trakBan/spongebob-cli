@@ -1,3 +1,0 @@
-termcolor
-BeautifulSoup4
-prettytable

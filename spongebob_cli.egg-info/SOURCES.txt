@@ -1,9 +1,0 @@
-LICENSE
-README.md
-setup.py
-spongebob-cli
-spongebob_cli.egg-info/PKG-INFO
-spongebob_cli.egg-info/SOURCES.txt
-spongebob_cli.egg-info/dependency_links.txt
-spongebob_cli.egg-info/requires.txt
-spongebob_cli.egg-info/top_level.txt
