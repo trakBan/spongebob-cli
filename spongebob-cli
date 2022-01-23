@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # This code is licensed under GNU General Public License v3.0. I encouruage you to do the same to the software you write!
-# TODO: --binge, --download-all, --list {n:}
+# TODO: --binge, --download-all
 
 try:
     from bs4 import BeautifulSoup
@@ -107,7 +107,7 @@ real = ""
 
 # This is if no arguments were passed.
 if args == "  ":
-    ListEpisodes(139)
+    ListEpisodes(339)
     print(colored("No arguments were passed. Default settings applied.", "green"), "\n")
 
     while(True):
