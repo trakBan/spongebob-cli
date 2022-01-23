@@ -1,7 +1,8 @@
 # spongebob-cli
 Watch classic spongebob from the terminal!
+Thanks to everyone that is starring, forking, writing issues, pull requesting and just users of spongebob-cli!
 
-![image](https://user-images.githubusercontent.com/81049050/150638868-18f6f51b-71e8-4d63-aa4c-2ebc2ec9c322.png)
+![spongebob](https://user-images.githubusercontent.com/81049050/150676918-9714a54a-06ea-40b2-9959-18f222e3fca6.gif)
 
 # Dependecies (all python dependecies will automatically be installed):
 1.  mpv player https://mpv.io/
