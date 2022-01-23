@@ -8,7 +8,8 @@ try:
     from termcolor import colored
 
 except ImportError:
-    print(colored("One or more library is missing! Check the list of libraries!", "red"))
+    # Using python color codes instead of termcolor if it isn't found
+    print("\033[1;31;40mOne or more library is missing! Check the list of libraries!")
 
 episodes = []
 counter = 0
