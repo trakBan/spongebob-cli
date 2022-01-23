@@ -2,11 +2,11 @@
 # This code is licensed under GNU General Public License v3.0. I encouruage you to do the same to the software you write!
 # TODO: --binge, --download-all
 
-
 try:
     from bs4 import BeautifulSoup
     import requests, subprocess, sys
     from termcolor import colored
+    from prettytable import PrettyTable
     from urllib.error import HTTPError
 
 except ImportError:
@@ -39,14 +39,26 @@ except HTTPError as e:
 for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
     counter += 1
     episodes.append(data.get("href"))
+            
 
 
 def ListEpisodes(limit_real):
     counter = 0
-    for data in soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real):
-        counter += 1
-        print(f"Episode {colored(':', 'cyan')} {data.get('title')} [{colored(counter, 'cyan')}]")
-            
+    table = PrettyTable()
+    
+    episode_number = []
+    episode_title = []
+    for data in soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real):        
+        counter = counter + 1
+        episode_title.append(data.get("title"))
+        episode_number.append(colored(counter, "cyan" ))
+    
+    table.add_column("Title", episode_title)
+    table.add_column("Episode", episode_number)
+    
+    table.align["Title"] = "l"
+    print(table)
+
 
 # This function get the direct mp4 link
 def VideoSource(source):
