@@ -59,7 +59,7 @@ try:
     args = sys.argv[1]
 
 except IndexError:
-    args = '' 
+    args = " " 
 
 try:
     args2 = sys.argv[2]
@@ -106,14 +106,10 @@ elif args.replace(' ', '') in ["--help", "-h"]:
     """)
 
 # This is if no arguments were passed.
-<<<<<<< HEAD
-if args == "  ":
+if args == " ":
     ListEpisodes(339)
-=======
-else:
     real = ''
-    ListEpisodes(139)
->>>>>>> c61a80168390910e7e2a883e6047be20f4023edb
+
     print(colored("No arguments were passed. Default settings applied.", "green"), "\n")
 
     while(True):
