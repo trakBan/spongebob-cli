@@ -7,8 +7,8 @@ try:
     import requests, subprocess, sys
     from termcolor import colored
 
-except:
-    print("One or more library is missing! Check the list of libraries!")
+except ImportError:
+    print(colored("One or more library is missing! Check the list of libraries!", "red"))
 
 episodes = []
 counter = 0
@@ -20,14 +20,14 @@ raw = requests.get("https://www.megacartoons.net/help-wanted/").text
 soup = BeautifulSoup(raw, "html.parser")
 
 for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
-    counter = counter + 1
+    counter += 1
     episodes.append(data.get("href"))
 
 def ListEpisodes(limit_real):
     counter = 0
     for data in soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real):
-        counter = counter + 1
-        print("Episode", colored(":", "cyan"), data.get("title"), "[", colored(counter, "cyan" ), "]")
+        counter += 1
+        print(f"Episode {colored(':', 'cyan')} {data.get('title')} [{colored(counter, 'cyan')}]")
             
 
 # This function get the direct mp4 link
@@ -50,6 +50,7 @@ def Play(DirectLink):
 def Download(source):
     try:
         subprocess.run(["youtube-dl", source])
+        print(colored("Download complete!", "green"))
     
     except:
         print("Downloading the video failed. Be sure to have youtube-dl installed.")
@@ -58,15 +59,16 @@ try:
     args = sys.argv[1]
 
 except IndexError:
-    args = "  " 
+    args = '' 
 
 try:
     args2 = sys.argv[2]
 except:
     pass
 
+
 # Download Function
-if args == "--download" or args == "-d":
+if args.replace(' ', '') in ["--download", "-d"]:
     try:
         args2 = int(args2)
         real = VideoSource(episodes[args2 - 1])
@@ -76,7 +78,7 @@ if args == "--download" or args == "-d":
         print(colored("No arguments passed with download function or the index is out of range, aborting...!", "red"))
 
 # List function
-if args == "--list" or args == "-l":
+elif args.replace(' ', '') in ["--list", "-l"]:
     try:
         args2 = int(args2)
         ListEpisodes(args2)
@@ -85,7 +87,7 @@ if args == "--list" or args == "-l":
         ListEpisodes(339)
 
 # Play function
-if args == "-p" or args == "--play":
+elif args.replace(' ', '') in ["--play", "-p"]:
     try:
         args2 = int(args2)
         real = VideoSource(episodes[args2 - 1])
@@ -94,7 +96,7 @@ if args == "-p" or args == "--play":
     except:
         print(colored("No arguments were passed with the play function or the index is out of range, aborting...", "red"))
 
-if args == "-h" or args == "--help":
+elif args.replace(' ', '') in ["--help", "-h"]:
     print("""
     --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
     --list | -l, usage --list, this will list all the episodes and then exit the programm
@@ -103,23 +105,22 @@ if args == "-h" or args == "--help":
     --help | -h      usage --help this will print what each argument does
     """)
 
-real = ""
-
 # This is if no arguments were passed.
-if args == "  ":
+else:
+    real = ''
     ListEpisodes(139)
     print(colored("No arguments were passed. Default settings applied.", "green"), "\n")
 
     while(True):
-        video_input = input("What episode do you want to watch? {type a number by the right side}: ")
+        video_input = input("What episode do you want to watch? (type a number by the right side): ").replace(' ', '')
 
         try:
             video_input = int(video_input)
 
         except:
-            if video_input == "exit" or video_input == "quit" or video_input == "close" or video_input == "q":
+            if video_input.replace(' ', '') in ["exit", "quit", "close", 'q']:
                 print("Quitting the programm!")
-                break
+                sys.exit()
 
             print(colored("You need to type a number!", "red"))
             
