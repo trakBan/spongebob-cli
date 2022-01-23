@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # This code is licensed under GNU General Public License v3.0. I encouruage you to do the same to the software you write!
-# TODO: --binge, --download-all, --list {n:}
+# TODO: --binge, --download-all
 
 from urllib.error import HTTPError
 
@@ -71,7 +71,7 @@ def Download(source):
 try:
     args = sys.argv[1]
 except IndexError:
-    args = '' 
+    args = " " 
 
 try:
     args2 = sys.argv[2]
