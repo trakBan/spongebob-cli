@@ -12,6 +12,7 @@ Watch classic spongebob from the terminal!
  If the programm was ran without arguments it will ist all the episodes an it will let you play them.
  --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
  --list | -l,     usage --list, this will list all the episodes and then exit the programm
+ --list | -l, usage --list {number} this will show the number of episodes with the limit you provided.
  --play | -p      usage --play {a number of a episode}, This will play the episode without listing the episodes
  --help | -h      usage --help this will print what each argument does
 ```
