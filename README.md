@@ -34,7 +34,15 @@ yay -S spongebob-cli-git
 
 If setup.py fails try this:
 ```
-pip3 install termcolor beautifulsoup4 prettytable
+pip3 install termcolor beautifulsoup4 prettytable halo
 ```
-If video wont play check if you have mpv and youtube-dl installed.
+Gentoo users will have to add --user at the end of that line of code
+
+If the video wont play check if you have mpv and youtube-dl installed.
 If you dont have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc and alias it to youtube-dl
+
+# Contributors
+[yaacornus](https://github.com/yaacornus)
+[redouane](https://github.com/red-elka)
+[totensee](https://github.com/totensee)
+[Kat](https://github.com/TransKat)
