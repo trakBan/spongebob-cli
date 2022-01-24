@@ -6,8 +6,8 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 
 
 # Dependecies (all python dependecies will automatically be installed):
-1.  mpv player https://mpv.io/
-2.  youtube-dl https://github.com/ytdl-org
+1.  mpv player https://mpv.io/  (Must be installed through a package manager)
+2.  youtube-dl https://github.com/ytdl-org  (Python dependency)
 
 # Usage:
 ```
