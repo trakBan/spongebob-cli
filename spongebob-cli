@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # This code is licensed under GNU General Public License v3.0. I encouruage you to do the same to the software you write!
-# TODO: --binge, --download-all
+
+# TODO: queee {1-10} this will play first to tenth episode |  queee {1 2 3} This will play first, second and third episode
 
 try:
     from bs4 import BeautifulSoup
-    import requests, subprocess, sys, random
+    import requests, subprocess, sys, random, time
     from termcolor import colored
     from prettytable import PrettyTable
     from urllib.error import HTTPError
     from halo import Halo
-    import time
     
     from func import httperror_assess
     
@@ -24,8 +24,9 @@ counter = 0
 
 
 # It fetches the episodes from this link, So that episode is not avaliable.
+# Historically this used to be help wanted, but since it was the first episode it was changed to the last
 try:
-    link = "https://www.megacartoons.net/help-wanted/"
+    link = "https://www.megacartoons.net/truth-or-square/"
     raw = requests.get(link).text
     soup = BeautifulSoup(raw, "html.parser")
 
@@ -123,7 +124,7 @@ try:
             print(colored("No arguments passed with download function or the index is out of range, aborting...!", "red"))
 
     # Dowload all
-    elif args.replace(' ', '') in ["--download-all", "--da"]:
+    elif args.replace(' ', '') in ["--download-all", "-da"]:
         dled = 0
         try:
             print(colored("Downloading all fetched episodes.", "green"))
@@ -144,7 +145,21 @@ try:
             
         finally:
             print(colored(f"{dled} episodes were downloaded."))
-            
+           
+    elif args.replace(' ', '') in ["--binge", "-b"]:
+        try:
+            print("Playing every episode from beggining")
+
+            for x in range(len(episodes)):
+                print(f"Playing episode {x + 1}", end = "")
+                source = VideoSource(episodes[x + 1])
+                Play(source)
+                print(f"Playing episode {x + 1}", end = "")
+                continue
+
+        except HTTPError as e:
+            httperror_assess(e.code)
+
     # List function
     elif args.replace(' ', '') in ["--list", "-l"]:
         try:
@@ -175,6 +190,8 @@ try:
     elif args.replace(' ', '') in ["--help", "-h"]:
         print("""
         --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
+        --download-all | -da, usage --download-all, This will download every video spongebob video it scrapes
+        --binge | -b , usage spongebob-cli --binge, This is used to start the first episode to the last
         --list | -l, usage --list, this will list all the episodes and then exit the programm
         --list | -l, usage --list {number} this will show the number of episodes with the limit you provided.
         --play | -p, usage --play {a number of a episode}, This will play the episode without listing the episodes

@@ -13,6 +13,8 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 ```
  If the programm was ran without arguments it will ist all the episodes an it will let you play them.
  --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
+ --download-all | -da, usage --download-all, This will download every video spongebob video it scrapes
+ --binge | -b , usage spongebob-cli --binge, This is used to start the first episode to the last
  --list | -l,     usage --list, this will list all the episodes and then exit the programm
  --list | -l, usage --list {number} this will show the number of episodes with the limit you provided.
  --play | -p      usage --play {a number of a episode}, This will play the episode without listing the episodes
@@ -42,7 +44,7 @@ If the video wont play check if you have mpv and youtube-dl installed.
 If you dont have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc and alias it to youtube-dl
 
 # Contributors
-[yaacornus](https://github.com/yaacornus)
-[redouane](https://github.com/red-elka)
-[totensee](https://github.com/totensee)
-[Kat](https://github.com/TransKat)
+[yaacornus](https://github.com/yaacornus), 
+[redouane](https://github.com/red-elka), 
+[totensee](https://github.com/totensee), 
+[Kat](https://github.com/TransKat), 
