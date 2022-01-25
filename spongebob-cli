@@ -10,7 +10,8 @@ try:
     from prettytable import PrettyTable
     from urllib.error import HTTPError
     from halo import Halo
-    
+   
+    # local file, func.py
     from func import httperror_assess
     
 except ImportError or ModuleNotFoundError:
@@ -24,7 +25,7 @@ counter = 0
 
 
 # It fetches the episodes from this link, So that episode is not avaliable.
-# Historically this used to be help wanted, but since it was the first episode it was changed to the last
+# Historically this used to be help wanted episode, but since it was the first episode it was changed to the last
 try:
     link = "https://www.megacartoons.net/truth-or-square/"
     raw = requests.get(link).text
@@ -33,7 +34,7 @@ try:
 except HTTPError as e:
     httperror_assess(e.code)    
 
-
+# This is to fetch all the episodes links
 for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
     counter += 1
     episodes.append(data.get("href"))
@@ -69,13 +70,12 @@ def VideoSource(source):
     link = soup.find("input", {"name":"main_video_url"})["value"]
     return link
 
-@Halo(text="Playing the episode", spinner="shark", color="green")
+# It used to just void the output of MPV but since that was introduces half of the episdoes failed to play. Thats why its no longer voiding the MPV output
+# This function for some reason randomly fails and need to be fixed ASAP
 def Play(DirectLink):
     try:
-        subprocess.run(["mpv", DirectLink],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.STDOUT)
-    
+        subprocess.run(["mpv", DirectLink])
+                
     except subprocess.CalledProcessError:
         print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
     
@@ -83,13 +83,9 @@ def Play(DirectLink):
         print(colored("\nUser interruped with the operation, aborting.", "red"))
         sys.exit()
 
-
-@Halo(text="Downloading the episode", spinner="shark", color="green")
 def Download(source):
     try:
-        subprocess.run(["youtube-dl", source], 
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.STDOUT)
+        subprocess.run(["youtube-dl", source]) 
         print(colored("\nDownload complete!", "green"))
     
     except ImportError or subprocess.CalledProcessError:
@@ -185,6 +181,7 @@ try:
 
     elif args.replace('  ', '') in ["--random", "-r"]:
         real = VideoSource(episodes[round(random.uniform(1, 337))])
+        print(colored("You are now watching: ", "green"), real)
         Play(real)
 
     elif args.replace(' ', '') in ["--help", "-h"]:
@@ -220,10 +217,14 @@ try:
             except IndexError:
                 print("The video you chose is out of range or doesnt exist")
                 continue
- 
-            real = VideoSource(episodes[video_input - 1])
-            print(colored(f"Now playing: {real}\n", "green"))
-            Play(real)
+            
+            try:
+                real = VideoSource(episodes[video_input - 1])
+                print(colored(f"Now playing: {real}\n", "green"))
+                Play(real)
+            
+            except IndexError:
+                print("The episode you want to play doesnt exist or is out of range")
             
  
 

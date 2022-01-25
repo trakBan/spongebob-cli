@@ -32,6 +32,9 @@ There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package
 ```
 yay -S spongebob-cli-git
 ```
+# Episodes that are known to not work
+Episode: 30, 
+
 # Troubleshooting
 
 If setup.py fails try this:
