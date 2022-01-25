@@ -10,7 +10,7 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 
 # Usage:
 ```
- If the programm was ran without arguments it will ist all the episodes an it will let you play them.
+ If the programm was ran without arguments it will list all the episodes and it will let you play them.
  --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
  --download-all | -da, usage --download-all, This will download every video spongebob video it scrapes
  --binge | -b , usage spongebob-cli --binge, This is used to start the first episode to the last
@@ -42,8 +42,8 @@ pip3 install termcolor beautifulsoup4 prettytable halo
 ```
 Gentoo users will have to add --user at the end of that line of code
 
-If the video wont play check if you have mpv and youtube-dl installed.
-If you dont have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc and alias it to youtube-dl
+If the video won't play check if you have mpv and youtube-dl installed.
+If you don't have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc and alias it to youtube-dl
 
 # Contributors
 [yaacornus](https://github.com/yaacornus), 
