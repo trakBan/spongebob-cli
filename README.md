@@ -8,18 +8,6 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 1.  mpv player https://mpv.io/  (Must be installed through a package manager)
 2.  youtube-dl https://github.com/ytdl-org  (Python dependency)
 
-# Usage:
-```
- If the programm was ran without arguments it will list all the episodes and it will let you play them.
- --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run.
- --download-all | -da, usage --download-all, This will download every spongebob video it scrapes.
- --binge | -b , usage spongebob-cli --binge, This is used to start the first episode and play until the last episode.
- --list | -l,     usage --list, this will list all the episodes and then exit the program.
- --list | -l, usage --list {number} this will show the number of episodes with the limit you provided.
- --play | -p      usage --play {a number of a episode}, This will play the episode without listing the episodes.
- --random | -r, usage spongebob-cli --random, This will play a random episode.
- --help | -h      usage --help this will print what each argument does.
-```
 # How to install:
 
 ## To download with and install with git:
@@ -55,7 +43,18 @@ One line:
 ```bash
 cd spongebob-cli; sudo chmod +x spongebob-cli; sudo python setup.py install
 ```
-
+# Usage:
+```
+ If the programm was ran without arguments it will list all the episodes and it will let you play them.
+ --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run.
+ --download-all | -da, usage --download-all, This will download every spongebob video it scrapes.
+ --binge | -b , usage spongebob-cli --binge, This is used to start the first episode and play until the last episode.
+ --list | -l,     usage --list, this will list all the episodes and then exit the program.
+ --list | -l, usage --list {number} this will show the number of episodes with the limit you provided.
+ --play | -p      usage --play {a number of a episode}, This will play the episode without listing the episodes.
+ --random | -r, usage spongebob-cli --random, This will play a random episode.
+ --help | -h      usage --help this will print what each argument does.
+```
 ## Arch and arch based distributions
 There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package for spongebob-cli mantained by [getchoo](https://github.com/getchoo)
 ```
