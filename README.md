@@ -27,6 +27,7 @@ cd spongebob-cli
 sudo chmod +x spongebob-cli; sudo python setup.py install
 ```
 ## Arch and arch based distributions
+This is not keept up to date regulary.
 There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package for spongebob-cli mantained by [getchoo](https://github.com/getchoo)
 ```
 yay -S spongebob-cli-git
