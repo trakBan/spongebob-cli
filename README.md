@@ -11,7 +11,7 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 ------
 # How to install:
 
-## To download with and install with git:
+## To download with and install with Git:
 #### For UNIX based OS - One Line Execution
 ```bash
 #Sudo isn't required as long as you're not in Root
