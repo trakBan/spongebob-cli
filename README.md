@@ -10,7 +10,7 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 
 # Usage:
 ```
- If the programm was ran without arguments it will ist all the episodes an it will let you play them.
+ If the programm was ran without arguments it will list all the episodes an it will let you play them.
  --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run
  --download-all | -da, usage --download-all, This will download every video spongebob video it scrapes
  --binge | -b , usage spongebob-cli --binge, This is used to start the first episode to the last
