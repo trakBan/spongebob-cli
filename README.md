@@ -8,6 +8,7 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 1.  mpv player https://mpv.io/  (Must be installed through a package manager)
 2.  youtube-dl https://github.com/ytdl-org  (Python dependency)
 
+------
 # How to install:
 
 ## To download with and install with git:
@@ -33,6 +34,7 @@ cd spongebob-cli
 python setup.py install
 ```
 --->
+
 ## To install manually - UNIX OS
 ```bash
 # Assuming you already have the Master downloaded
@@ -43,6 +45,7 @@ One line:
 ```bash
 cd spongebob-cli; sudo chmod +x spongebob-cli; sudo python setup.py install
 ```
+------
 # Usage:
 ```
  If the programm was ran without arguments it will list all the episodes and it will let you play them.
@@ -55,6 +58,8 @@ cd spongebob-cli; sudo chmod +x spongebob-cli; sudo python setup.py install
  --random | -r, usage spongebob-cli --random, This will play a random episode.
  --help | -h      usage --help this will print what each argument does.
 ```
+
+------
 ## Arch and arch based distributions
 There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package for spongebob-cli mantained by [getchoo](https://github.com/getchoo)
 ```
@@ -63,6 +68,7 @@ yay -S spongebob-cli-git
 # Episodes that are known to not work
 Episode: 30, 
 
+------
 # Troubleshooting
 
 - If setup.py fails try this:
@@ -82,6 +88,7 @@ Episode: 30,
 - If the video won't play check if you have mpv and youtube-dl installed.
 - If you don't have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc and alias it to youtube-dl
 
+------
 # Contributors
 [yaacornus](https://github.com/yaacornus), 
 [redouane](https://github.com/red-elka), 
