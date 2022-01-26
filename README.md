@@ -34,17 +34,6 @@ cd spongebob-cli
 python setup.py install
 ```
 --->
-
-## To install manually - UNIX OS
-```bash
-# Assuming you already have the Master downloaded
-cd spongebob-cli
-sudo chmod +x spongebob-cli; sudo python setup.py install
-```
-One line: 
-```bash
-cd spongebob-cli; sudo chmod +x spongebob-cli; sudo python setup.py install
-```
 ------
 # Usage:
 ```
