@@ -15,7 +15,7 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 #### For UNIX based OS - One Line Execution
 ```bash
 #Sudo isn't required as long as you're not in Root
-git clone https://github.com/trakBan/spongebob-cli.git
+git clone https://github.com/trakBan/spongebob-cli.gity
 cd spongebob-cli
 sudo chmod +x spongebob-cli
 sudo python setup.py install
@@ -34,17 +34,6 @@ cd spongebob-cli
 python setup.py install
 ```
 --->
-
-## To install manually - UNIX OS
-```bash
-# Assuming you already have the Master downloaded
-cd spongebob-cli
-sudo chmod +x spongebob-cli; sudo python setup.py install
-```
-One line: 
-```bash
-cd spongebob-cli; sudo chmod +x spongebob-cli; sudo python setup.py install
-```
 ------
 # Usage:
 ```
