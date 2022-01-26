@@ -26,6 +26,7 @@ One line:
 git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod +x spongebob-cli; sudo python setup.py install
 ```
 
+## Usage
 ```
  If the programm was ran without arguments it will list all the episodes and it will let you play them.
  --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run.
@@ -39,7 +40,7 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
 ```
 
 ## Arch and arch based distributions
-This is not keept up to date regulary.
+This is not kept up to date regulary.
 There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package for spongebob-cli mantained by [getchoo](https://github.com/getchoo)
 
 ```
@@ -48,9 +49,6 @@ yay -S spongebob-cli-git
 
 ## PackageStatus
 [![Packaging status](https://repology.org/badge/vertical-allrepos/spongebob-cli.svg)](https://repology.org/project/spongebob-cli/versions)
-
-# Episodes that are known to not work
-Episode: 30, 
 
 ## Episodes that are known to not work
 - Episode 30
