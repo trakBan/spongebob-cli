@@ -14,7 +14,7 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 ## To download with and install with Git:
 #### For UNIX based OS - One Line Execution
 ```bash
-#Sudo isn't required as long as you're not in Root
+#Sudo isn't required as long as you're in Root
 git clone https://github.com/trakBan/spongebob-cli.git
 cd spongebob-cli
 sudo chmod +x spongebob-cli
@@ -63,9 +63,13 @@ cd spongebob-cli; sudo chmod +x spongebob-cli; sudo python setup.py install
 ## Arch and arch based distributions
 This is not keept up to date regulary.
 There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package for spongebob-cli mantained by [getchoo](https://github.com/getchoo)
+
 ```
 yay -S spongebob-cli-git
 ```
+## PackageStatus
+[![Packaging status](https://repology.org/badge/vertical-allrepos/spongebob-cli.svg)](https://repology.org/project/spongebob-cli/versions)
+
 # Episodes that are known to not work
 Episode: 30, 
 
