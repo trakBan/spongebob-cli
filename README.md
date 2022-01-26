@@ -39,7 +39,7 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
  --help | -h      usage --help this will print what each argument does.
 ```
 
-## Arch and arch based distributions
+## Arch and Arch-based distributions
 This is not kept up to date regulary.
 There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package for spongebob-cli mantained by [getchoo](https://github.com/getchoo)
 
@@ -47,7 +47,7 @@ There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package
 yay -S spongebob-cli-git
 ```
 
-## PackageStatus
+## Package Status
 [![Packaging status](https://repology.org/badge/vertical-allrepos/spongebob-cli.svg)](https://repology.org/project/spongebob-cli/versions)
 
 ## Episodes that are known to not work
