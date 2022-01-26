@@ -12,6 +12,10 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 ### For UNIX based OS - One Line Execution
 Checkout the source code with `git` or download it as a .zip file.
 ```bash
+
+#Sudo isn't required as long as you're in Root
+git clone https://github.com/trakBan/spongebob-cli.git
+
 cd spongebob-cli
 chmod +x spongebob-cli
 sudo python setup.py install
@@ -22,17 +26,6 @@ One line:
 git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod +x spongebob-cli; sudo python setup.py install
 ```
 
-<!---
-#### For Windows OS
-```bash
-# NOTE: !LAUNCH YOUR CMD AS ADMIN!
-git clone https://github.com/trakBan/spongebob-cli.git
-cd spongebob-cli
-python setup.py install
-```
---->
-
-## Usage:
 ```
  If the programm was ran without arguments it will list all the episodes and it will let you play them.
  --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run.
@@ -48,9 +41,16 @@ python setup.py install
 ## Arch and arch based distributions
 This is not keept up to date regulary.
 There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package for spongebob-cli mantained by [getchoo](https://github.com/getchoo)
+
 ```
 yay -S spongebob-cli-git
 ```
+
+## PackageStatus
+[![Packaging status](https://repology.org/badge/vertical-allrepos/spongebob-cli.svg)](https://repology.org/project/spongebob-cli/versions)
+
+# Episodes that are known to not work
+Episode: 30, 
 
 ## Episodes that are known to not work
 - Episode 30
