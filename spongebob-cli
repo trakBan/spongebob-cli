@@ -12,7 +12,7 @@ try:
     from halo import Halo
    
     # local file, func.py
-    from func import httperror_assess
+    from Spongebobcli import httperror_assess
     
 except ImportError or ModuleNotFoundError:
     # Using python color codes instead of termcolor if it isn't found
