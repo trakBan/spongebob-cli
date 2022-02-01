@@ -40,7 +40,6 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
 ```
 
 ## Arch and Arch-based distributions
-This is not kept up to date regulary.
 There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package for spongebob-cli mantained by [getchoo](https://github.com/getchoo)
 
 ```
