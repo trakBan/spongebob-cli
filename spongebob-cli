@@ -5,7 +5,7 @@
 
 try:
     from bs4 import BeautifulSoup
-    import requests, subprocess, sys, random, time
+    import requests, subprocess, sys, random, time, os
     from termcolor import colored
     from prettytable import PrettyTable
     from urllib.error import HTTPError
@@ -16,31 +16,9 @@ try:
     
 except ImportError or ModuleNotFoundError:
     # Using python color codes instead of termcolor if it isn't found
-    print("\033[1;31;40mOne or more library is missing! Check the list of libraries!")
-    sys.exit()
-
-
-episodes = []
-counter = 0
-
-
-# It fetches the episodes from this link, So that episode is not avaliable.
-# Historically this used to be help wanted episode, but since it was the first episode it was changed to the last
-try:
-    link = "https://www.megacartoons.net/truth-or-square/"
-    raw = requests.get(link).text
-    soup = BeautifulSoup(raw, "html.parser")
-
-except HTTPError as e:
-    httperror_assess(e.code)    
-
-# This is to fetch all the episodes links
-for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
-    counter += 1
-    episodes.append(data.get("href"))
+    raise SystemExit("\033[1;31;40mOne or more library is missing! Check the list of libraries!")
+    
             
-# spinner were not added as this function is always run, hence
-# adding it would cause maybe a lot of errors and would be trivial
 def ListEpisodes(limit_real):
     counter = 0
     table = PrettyTable()
@@ -79,21 +57,37 @@ def Play(DirectLink):
     except subprocess.CalledProcessError:
         print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
     
-    except KeyboardInterrupt:
-        print(colored("\nUser interruped with the operation, aborting.", "red"))
-        sys.exit()
-
+    
+@Halo(text="Downloading episode.", spinner="shark", color="green")
 def Download(source):
     try:
-        subprocess.run(["youtube-dl", source]) 
+        subprocess.run(["youtube-dl", source],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT)
+         
         print(colored("\nDownload complete!", "green"))
     
     except ImportError or subprocess.CalledProcessError:
         print(colored("Downloading the video failed. Be sure to have youtube-dl installed.", "red"))
 
-    except KeyboardInterrupt:
-        print(colored("\nUser interruped with the operation, aborting.", "red"))
-        sys.exit()
+
+episodes = []
+counter = 0
+
+# It fetches the episodes from this link, So that episode is not avaliable.
+# Historically this used to be help wanted episode, but since it was the first episode it was changed to the last
+try:
+    link = "https://www.megacartoons.net/truth-or-square/"
+    raw = requests.get(link).text
+    soup = BeautifulSoup(raw, "html.parser")
+
+except HTTPError as e:
+    httperror_assess(e.code)    
+
+# This is to fetch all the episodes links
+for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
+    counter += 1
+    episodes.append(data.get("href"))
 
 
 try:
@@ -113,8 +107,7 @@ try:
         try:
             args2 = int(args2)
             print(f"Downloading episode {colored(args2, 'cyan')}")
-            real = VideoSource(episodes[args2 - 1])
-            Download(real)
+            Download(VideoSource(episodes[args2 - 1]))
 
         except IndexError or ValueError:
             print(colored("No arguments passed with download function or the index is out of range, aborting...!", "red"))
@@ -123,14 +116,12 @@ try:
     elif args.replace(' ', '') in ["--download-all", "-da"]:
         dled = 0
         try:
-            print(colored("Downloading all fetched episodes.", "green"))
+            print(colored(f"Downloading all fetched episodes : {len(episodes)}", "green"))
+
             for x in range(len(episodes)):
                 print(f"Downloading episode {colored(x+1, 'cyan')}")
-                source = VideoSource(episodes[x+1])
-                Download(source)
-                print(f"Episode {x+1} downloaded!", end="")
-                time.sleep(2)
-                print("\r", end="")
+                Download(VideoSource(episodes[x+1]))
+                print(f"Episode {x+1} downloaded!", end="") ; time.sleep(2) ; print("\r", end="")
                 dled += 1
                 continue
             
@@ -148,9 +139,8 @@ try:
 
             for x in range(len(episodes)):
                 print(f"Playing episode {x + 1}", end = "")
-                source = VideoSource(episodes[x + 1])
-                Play(source)
-                print(f"Playing episode {x + 1}", end = "")
+                Play(VideoSource(episodes[x + 1]))                
+                time.sleep(2) ; print("\r", end="")
                 continue
 
         except HTTPError as e:
@@ -159,18 +149,18 @@ try:
     # List function
     elif args.replace(' ', '') in ["--list", "-l"]:
         try:
-            args2 = int(args2)
-            ListEpisodes(args2)
+            ListEpisodes(int(args2))
 
         except:
-            ListEpisodes(339)
+            # 3xx is replaced with len(episodes) to avoid error, if ever the fetched episodes if
+            # less than 3xx (it is 399 or 339 I think, if I remember correctly)
+            ListEpisodes(len(episodes))
 
     # Play function
     elif args.replace(' ', '') in ["--play", "-p"]:
         try:
             args2 = int(args2)
-            real = VideoSource(episodes[args2 - 1])
-            Play(real)
+            Play(VideoSource(episodes[args2 - 1]))
         
         except ValueError or IndexError:
             print(colored("No arguments were passed with the play function or the index is out of range, aborting...", "red"))
@@ -180,7 +170,7 @@ try:
         sys.subprocess(["git", "fetch"])
 
     elif args.replace('  ', '') in ["--random", "-r"]:
-        real = VideoSource(episodes[round(random.uniform(1, 337))])
+        real = VideoSource(episodes[random.randint(1, len(episodes))])
         print(colored("You are now watching: ", "green"), real)
         Play(real)
 
@@ -198,19 +188,19 @@ try:
 
     # This is if no arguments were passed.
     else:
-        ListEpisodes(339)
-        print(colored("No arguments were passed. Default settings applied.\n", "green"))
+        while True:
+            os.system("clear")
+            ListEpisodes(len(episodes)
+            print(colored("No arguments were passed. Default settings applied.\n", "green"))
 
-        while(True):
             try:
                 video_input = input("What episode do you want to watch? (type a number by the right side): ").replace(' ', '')
                 video_input = int(video_input)
                 
             except ValueError or AttributeError:
                 if video_input in ["exit", "quit", "close", 'q']:
-                    print("Quitting the programm!")
-                    sys.exit()
-
+                    raise SystemExit("Quitting the program!")
+                
                 print(colored("You need to type a number!", "red"))
                 continue
 
@@ -218,16 +208,11 @@ try:
                 print("The video you chose is out of range or doesnt exist")
                 continue
             
-            try:
+            else:
                 real = VideoSource(episodes[video_input - 1])
                 print(colored(f"Now playing: {real}\n", "green"))
-                Play(real)
-            
-            except IndexError:
-                print("The episode you want to play doesnt exist or is out of range")
-            
+                Play(real)         
  
 
 except KeyboardInterrupt:
-    print(colored("\nUser interruped with the operation, aborting.", "red"))
-    sys.exit()
+    raise SystemExit(colored("\nUser interruped with the operation, aborting.", "red"))
