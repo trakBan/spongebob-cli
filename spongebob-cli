@@ -190,7 +190,7 @@ try:
     else:
         while True:
             os.system("clear")
-            ListEpisodes(len(episodes)
+            ListEpisodes(len(episodes))
             print(colored("No arguments were passed. Default settings applied.\n", "green"))
 
             try:
