@@ -58,13 +58,17 @@ def Play(DirectLink):
         print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
     
     
-@Halo(text="Downloading episode.", spinner="shark", color="green")
-def Download(source):
+def Download(source, args3=False):
     try:
-        subprocess.run(["youtube-dl", source],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.STDOUT)
-         
+        if args3 is False:
+            with Halo(text="Downloading episode.", spinner="shark", color="green"):
+                subprocess.run(["youtube-dl", source],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.STDOUT)
+        else:
+            subprocess.run(["youtube-dl", source])
+
+
         print(colored("\nDownload complete!", "green"))
     
     except ImportError or subprocess.CalledProcessError:
@@ -101,13 +105,19 @@ except:
     pass
 
 
-# Download Function
 try:
+    # Download Function
     if args.replace(' ', '') in ["--download", "-d"]:
         try:
-            args2 = int(args2)
+            try:
+                args3 = sys.argv[3]
+            except:
+                args3 = False
+            else:
+                args3 = True 
+
             print(f"Downloading episode {colored(args2, 'cyan')}")
-            Download(VideoSource(episodes[args2 - 1]))
+            Download(VideoSource(episodes[int(args2) - 1]), args3)
 
         except IndexError or ValueError:
             print(colored("No arguments passed with download function or the index is out of range, aborting...!", "red"))
@@ -116,11 +126,18 @@ try:
     elif args.replace(' ', '') in ["--download-all", "-da"]:
         dled = 0
         try:
+            try:
+                args3 = sys.argv[2]
+            except:
+                args3 = False
+            else:
+                args3 = True
+                
             print(colored(f"Downloading all fetched episodes : {len(episodes)}", "green"))
 
             for x in range(len(episodes)):
                 print(f"Downloading episode {colored(x+1, 'cyan')}")
-                Download(VideoSource(episodes[x+1]))
+                Download(VideoSource(episodes[x+1]), args3)
                 print(f"Episode {x+1} downloaded!", end="") ; time.sleep(2) ; print("\r", end="")
                 dled += 1
                 continue
@@ -159,8 +176,7 @@ try:
     # Play function
     elif args.replace(' ', '') in ["--play", "-p"]:
         try:
-            args2 = int(args2)
-            Play(VideoSource(episodes[args2 - 1]))
+            Play(VideoSource(episodes[int(args2) - 1]))
         
         except ValueError or IndexError:
             print(colored("No arguments were passed with the play function or the index is out of range, aborting...", "red"))
