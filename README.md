@@ -76,7 +76,7 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
 - If you don't have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc for youtube-dl and direct it to your fork.
 
 ## Rewrite in rust!
- [Ali-TM-original ](https://github.com/Ali-TM-original) Made [spongebob-cli in rus](https://github.com/Ali-TM-original/SpongbobCli-Rust)
+ [Ali-TM-original ](https://github.com/Ali-TM-original) Made [spongebob-cli in rust](https://github.com/Ali-TM-original/SpongbobCli-Rust)
  
 ## Contributors
 [yaacornus](https://github.com/yaacornus), 
