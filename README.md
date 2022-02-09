@@ -75,6 +75,9 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
     - You can also install `youtube-dl` through your package manager if `setup.py` did not install it correctly
 - If you don't have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc for youtube-dl and direct it to your fork.
 
+## Rewrite in rust!
+ [Ali-TM-original ](https://github.com/Ali-TM-original) Made [spongebob-cli in rus](https://github.com/Ali-TM-original/SpongbobCli-Rust)
+ 
 ## Contributors
 [yaacornus](https://github.com/yaacornus), 
 [redouane](https://github.com/red-elka), 
