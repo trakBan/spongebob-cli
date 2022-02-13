@@ -45,6 +45,8 @@ There is an [AUR](https://aur.archlinux.org/packages/spongebob-cli-git/) package
 ```
 yay -S spongebob-cli-git
 ```
+## Windows
+You need to install mpv through a windows package manager
 
 ## Package Status
 [![Packaging status](https://repology.org/badge/vertical-allrepos/spongebob-cli.svg)](https://repology.org/project/spongebob-cli/versions)
