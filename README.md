@@ -52,7 +52,7 @@ You need to install mpv through a windows package manager
 [![Packaging status](https://repology.org/badge/vertical-allrepos/spongebob-cli.svg)](https://repology.org/project/spongebob-cli/versions)
 
 ## Episodes that are known to not work
-- Episode 30
+- Episode 30, - Episode 129
 
 ## Troubleshooting
 
