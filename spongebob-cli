@@ -5,7 +5,7 @@
 
 try:
     from bs4 import BeautifulSoup
-    import requests, subprocess, sys, random, time, os
+    import requests, subprocess, sys, random, time, os, webbrowser
     from termcolor import colored
     from prettytable import PrettyTable
     from urllib.error import HTTPError
@@ -16,7 +16,7 @@ try:
     
 except ImportError or ModuleNotFoundError:
     # Using python color codes instead of termcolor if it isn't found
-    raise SystemExit("\033[1;31;40mOne or more library is missing! Check the list of libraries!")
+    raise SystemExit("\033[0;31;40mOne or more library is missing! Check the list of libraries!")
     
             
 def ListEpisodes(limit_real):
@@ -51,11 +51,20 @@ def VideoSource(source):
 # It used to just void the output of MPV but since that was introduces half of the episdoes failed to play. Thats why its no longer voiding the MPV output
 # This function for some reason randomly fails and need to be fixed ASAP
 def Play(DirectLink):
-    try:
-        subprocess.run(["mpv", DirectLink])
+    
+    check = input(colored("Do you want to play this video in browser(1) or in mpv(2) {default mpv}: ", "cyan"))
+
+    if check in ("1", "browser"):
+        print(DirectLink)
+        webbrowser.open_new_tab(DirectLink)
+
+    else:
+
+        try:
+            subprocess.run(["mpv", DirectLink])
                 
-    except subprocess.CalledProcessError:
-        print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
+        except subprocess.CalledProcessError:
+            print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
     
     
 @Halo(text="Downloading episode.", spinner="shark", color="green")
