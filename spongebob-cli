@@ -4,8 +4,8 @@
 # TODO: queee {1-10} this will play first to tenth episode |  queee {1 2 3} This will play first, second and third episode
 
 try:
-    from bs4 import BeautifulSoup
     import requests, subprocess, sys, random, time, os, webbrowser
+    from bs4 import BeautifulSoup
     from termcolor import colored
     from prettytable import PrettyTable
     from urllib.error import HTTPError
