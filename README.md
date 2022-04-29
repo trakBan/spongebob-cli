@@ -2,7 +2,7 @@
 Watch classic spongebob from the terminal!
 Thanks to everyone that is starring, forking, writing issues, pull requesting and just users of spongebob-cli!
 
-![updatedgif45729805790](https://user-images.githubusercontent.com/81049050/150833862-0a828939-f267-4bd2-931f-79df55d51e28.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/81049050/165950004-a21d0199-79b5-4ebe-b733-94df1fee918e.gif)
 
 ## Dependecies:
 - mpv player https://mpv.io/  (Must be installed through a package manager)
