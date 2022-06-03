@@ -1,11 +1,12 @@
 # spongebob-cli
 Watch classic spongebob from the terminal!
-Thanks to everyone that is starring, forking, writing issues, pull requesting and just users of spongebob-cli!
+Thanks to everyone that is starring, forking, writing issues, pull requesting and just the users of spongebob-cli!
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/81049050/165950004-a21d0199-79b5-4ebe-b733-94df1fee918e.gif)
 
 ## Dependecies:
 - mpv player https://mpv.io/  (Must be installed through a package manager)
+- Every other dependendency will get automatticaly installed
 
 ## How to install:
 
@@ -13,12 +14,12 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 Checkout the source code with `git` or download it as a .zip file.
 ```bash
 
-#Sudo isn't required as long as you're in Root
+# Root is only required for the last line
 git clone https://github.com/trakBan/spongebob-cli.git
 
 cd spongebob-cli
 chmod +x spongebob-cli
-sudo python setup.py install
+python setup.py install
 ```
 
 One line: 
@@ -67,6 +68,7 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
 ```
 
 #### Gentoo users:
+Gentoo users have to add --user when they are installing with setup.py
 Run this instead:
 ```bash
 git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod +x spongebob-cli; python3 setup.py install --user
@@ -75,12 +77,13 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
 ### If the video won't play
 - Check if you have mpv and youtube-dl installed.
     - You can also install `youtube-dl` through your package manager if `setup.py` did not install it correctly
-- If you don't have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc for youtube-dl and direct it to your fork.
+- If you don't have youtube-dl but a fork of it, make an alias in your ~./bashrc file and alias it to youtube-dl
 
 ## Rewrite in rust!
  [Ali-TM-original ](https://github.com/Ali-TM-original) Made [spongebob-cli in rust](https://github.com/Ali-TM-original/SpongbobCli-Rust)
  
 ## Contributors
+Feel free to add yourself in if you contributed to the project.
 [yaacornus](https://github.com/yaacornus), 
 [redouane](https://github.com/red-elka), 
 [totensee](https://github.com/totensee), 
