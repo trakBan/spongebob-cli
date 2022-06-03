@@ -59,11 +59,18 @@ def VideoSource(source):
 # This function for some reason randomly fails and need to be fixed ASAP
 def Play(DirectLink):
     
-    check = input(colored("Do you want to play this video in browser(1) or in mpv(2) {default mpv}: ", "cyan"))
+    check = input(colored("Do you want to play this video in browser(1), mpv(2), or fullscreen-mpv(3) {default fullscreen-mpv}: ", "cyan"))
 
     if check in ("1", "browser"):
         print(DirectLink)
         webbrowser.open_new_tab(DirectLink)
+
+    elif check in ("2", "mpv"):
+        try:
+            subprocess.run(["mpv", DirectLink])
+                
+        except subprocess.CalledProcessError:
+            print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
 
     else:
 
