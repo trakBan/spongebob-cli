@@ -16,7 +16,7 @@ try:
     
 except ImportError or ModuleNotFoundError:
     # Using python color codes instead of termcolor if it isn't found
-    raise SystemExit("\033[0;31;40mOne or more library is missing! Check the list of libraries!")
+    raise SystemExit("\033[0;31;40mOne or more library is missing! Check the list of libraries!\033[0;37;40m")
     
             
 def ListEpisodes(limit_real):
