@@ -44,22 +44,24 @@ def ListEpisodes(limit_real):
     print(table)
 
 
-# This function get the direct mp4 link
+# This function gets the direct mp4 link
 @Halo(text="Getting video source", spinner="shark", color="green")
 def VideoSource(source):
 
     raw = requests.get(source).text
     soup = BeautifulSoup(raw, "html.parser")
-
-    # This took me way to long to figure out, DONT TOUCH
+    
     link = soup.find("input", {"name":"main_video_url"})["value"]
     return link
 
 # It used to just void the output of MPV but since that was introduces half of the episdoes failed to play. Thats why its no longer voiding the MPV output
-# This function for some reason randomly fails and need to be fixed ASAP
 def Play(DirectLink):
     
-    check = input(colored("Do you want to play this video in browser(1), mpv(2), or fullscreen-mpv(3) {default fullscreen-mpv}: ", "cyan"))
+    check = input(colored("Do you want to play this video in browser(1), mpv(2), or fullscreen-mpv(3, default): ", "cyan"))
+
+    # This makes the link more human readable
+    # First it only prints every character after the 34th and then just replaces ".mp4" and "-" with blank space
+    print(colored("You are now watching:", "green"), DirectLink[34:].replace(".mp4", "").replace("-", " "), "\n")
 
     if check in ("1", "browser"):
         print(DirectLink)
@@ -97,10 +99,10 @@ def Download(source):
 episodes = []
 counter = 0
 
-# It fetches the episodes from this link, So that episode is not avaliable.
-# Historically this used to be help wanted episode, but since it was the first episode it was changed to the last
+# It fetches the episodes from that link
+# Historically the episode it was fetching wasn't scraped and therfore wasn't avaliable to play
 try:
-    link = "https://www.megacartoons.net/truth-or-square/"
+    link = "https://www.megacartoons.net/help-wanted/"
     raw = requests.get(link).text
     soup = BeautifulSoup(raw, "html.parser")
 
@@ -198,7 +200,6 @@ try:
 
     elif args.replace('  ', '') in ["--random", "-r"]:
         real = VideoSource(episodes[random.randint(1, len(episodes))])
-        print(colored("You are now watching: ", "green"), real)
         Play(real)
 
     elif args.replace(' ', '') in ["--help", "-h"]:
@@ -235,12 +236,11 @@ try:
                 continue
 
             except IndexError:
-                print("The video you chose is out of range or doesnt exist")
+                print("The video you chose is out of range or doesn't exist")
                 continue
             
             else:
                 real = VideoSource(episodes[video_input - 1])
-                print(colored(f"Now playing: {real}\n", "green"))
                 Play(real)         
  
 
