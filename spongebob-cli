@@ -25,6 +25,13 @@ def ListEpisodes(limit_real):
     
     episode_number = []
     episode_title = []
+
+    # Get first episode (class is "btn btn-sm btn-default series-current" instead of "btn btn-sm btn-default")
+    data = soup.find("a", class_ = "btn btn-sm btn-default series-current")
+    counter += 1
+    episode_title.append(data.get("title"))
+    episode_number.append(colored(counter, "cyan" ))
+
     for data in soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real):        
         counter += 1
         episode_title.append(data.get("title"))
@@ -61,7 +68,7 @@ def Play(DirectLink):
     else:
 
         try:
-            subprocess.run(["mpv", DirectLink])
+            subprocess.run(["mpv", "--fs", DirectLink])
                 
         except subprocess.CalledProcessError:
             print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
@@ -94,6 +101,10 @@ except HTTPError as e:
     httperror_assess(e.code)    
 
 # This is to fetch all the episodes links
+# Get first episode (class is "btn btn-sm btn-default series-current" instead of "btn btn-sm btn-default")
+data = soup.find("a", class_ = "btn btn-sm btn-default series-current")
+episodes.append(data.get("href"))
+counter += 1
 for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
     counter += 1
     episodes.append(data.get("href"))
@@ -198,12 +209,15 @@ try:
     # This is if no arguments were passed.
     else:
         while True:
-            os.system("clear")
+            if sys.platform != "win32":
+                os.system("clear")
+            else:
+                os.system("cls")
             ListEpisodes(len(episodes))
             print(colored("No arguments were passed. Default settings applied.\n", "green"))
 
             try:
-                video_input = input("What episode do you want to watch? (type a number by the right side): ").replace(' ', '')
+                video_input = input("What episode do you want to watch? (type a number by the right side or `q` to quit): ").replace(' ', '')
                 video_input = int(video_input)
                 
             except ValueError or AttributeError:
