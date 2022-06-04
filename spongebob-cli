@@ -30,7 +30,7 @@ def ListEpisodes(limit_real):
     episode_title.append(data.get("title"))
     episode_number.append(colored(1, "cyan" ))
 
-    for counter, data in enumerate(soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real)):
+    for counter, data in enumerate(soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real), start=2):
         episode_title.append(data.get("title"))
         episode_number.append(colored(counter, "cyan" ))
     
