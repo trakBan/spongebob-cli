@@ -1,3 +1,5 @@
+spongebob_cli.egg-info/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -112,6 +114,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.env*/
 .env
 .venv
 env/

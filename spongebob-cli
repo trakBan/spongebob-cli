@@ -20,7 +20,6 @@ except ImportError or ModuleNotFoundError:
     
             
 def ListEpisodes(limit_real):
-    counter = 0
     table = PrettyTable()
     
     episode_number = []
@@ -28,12 +27,10 @@ def ListEpisodes(limit_real):
 
     # Get first episode (class is "btn btn-sm btn-default series-current" instead of "btn btn-sm btn-default")
     data = soup.find("a", class_ = "btn btn-sm btn-default series-current")
-    counter += 1
     episode_title.append(data.get("title"))
-    episode_number.append(colored(counter, "cyan" ))
+    episode_number.append(colored(1, "cyan" ))
 
-    for data in soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real):        
-        counter += 1
+    for counter, data in enumerate(soup.find_all("a", class_ = "btn btn-sm btn-default", limit = limit_real)):
         episode_title.append(data.get("title"))
         episode_number.append(colored(counter, "cyan" ))
     
@@ -48,8 +45,8 @@ def ListEpisodes(limit_real):
 @Halo(text="Getting video source", spinner="shark", color="green")
 def VideoSource(source):
 
-    raw = requests.get(source).text
-    soup = BeautifulSoup(raw, "html.parser")
+    response = requests.get(source).text
+    soup = BeautifulSoup(response, "html.parser")
     
     link = soup.find("input", {"name":"main_video_url"})["value"]
     return link
@@ -97,14 +94,13 @@ def Download(source):
 
 
 episodes = []
-counter = 0
 
 # It fetches the episodes from that link
 # Historically the episode it was fetching wasn't scraped and therfore wasn't avaliable to play
 try:
     link = "https://www.megacartoons.net/help-wanted/"
-    raw = requests.get(link).text
-    soup = BeautifulSoup(raw, "html.parser")
+    response = requests.get(link).text
+    soup = BeautifulSoup(response, "html.parser")
 
 except HTTPError as e:
     httperror_assess(e.code)    
@@ -113,9 +109,7 @@ except HTTPError as e:
 # Get first episode (class is "btn btn-sm btn-default series-current" instead of "btn btn-sm btn-default")
 data = soup.find("a", class_ = "btn btn-sm btn-default series-current")
 episodes.append(data.get("href"))
-counter += 1
 for data in soup.find_all("a", class_ = "btn btn-sm btn-default"):
-    counter += 1
     episodes.append(data.get("href"))
 
 
@@ -143,15 +137,14 @@ try:
 
     # Dowload all
     elif args.replace(' ', '') in ["--download-all", "-da"]:
-        dled = 0
         try:
             print(colored(f"Downloading all fetched episodes : {len(episodes)}", "green"))
 
-            for x in range(len(episodes)):
+            for counter, x in enumerate(range(len(episodes))):
                 print(f"Downloading episode {colored(x+1, 'cyan')}")
                 Download(VideoSource(episodes[x+1]))
                 print(f"Episode {x+1} downloaded!", end="") ; time.sleep(2) ; print("\r", end="")
-                dled += 1
+                dled = counter
                 continue
             
             print(colored(f"All {len(episodes)} are downloaded!", "green"))
@@ -217,10 +210,7 @@ try:
     # This is if no arguments were passed.
     else:
         while True:
-            if sys.platform != "win32":
-                os.system("clear")
-            else:
-                os.system("cls")
+            os.system("clear") if os.name == "posix" else os.system("cls")
             ListEpisodes(len(episodes))
             print(colored("No arguments were passed. Default settings applied.\n", "green"))
 
