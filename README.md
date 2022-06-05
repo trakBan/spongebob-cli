@@ -84,8 +84,8 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
  
 ## Contributors
 Feel free to add yourself in if you contributed to the project.
-[yaacornus](https://github.com/yaacornus), 
-[redouane](https://github.com/red-elka), 
-[totensee](https://github.com/totensee), 
-[Kat](https://github.com/TransKat), 
-[dev-nolant](https://github.com/dev-nolant)
+<div align="center">
+	<a href="https://github.com/trakBan/spongebob-cli/graphs/contributors">
+  	<img src="https://contrib.rocks/image?repo=trakBan/spongebob-cli" />
+	</a>
+</div>
