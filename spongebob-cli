@@ -4,12 +4,19 @@
 # TODO: queee {1-10} this will play first to tenth episode |  queee {1 2 3} This will play first, second and third episode
 
 try:
-    import requests, subprocess, sys, random, time, os, webbrowser
-    from bs4 import BeautifulSoup
-    from termcolor import colored
-    from prettytable import PrettyTable
+    import os
+    import random
+    import subprocess
+    import sys
+    import time
+    import webbrowser
     from urllib.error import HTTPError
+
+    import requests
+    from bs4 import BeautifulSoup
     from halo import Halo
+    from prettytable import PrettyTable
+    from termcolor import colored
 
     # local file, func.py
     from func import httperror_assess
