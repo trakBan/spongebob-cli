@@ -23,9 +23,7 @@ try:
 
 except ImportError or ModuleNotFoundError:
     # Using python color codes instead of termcolor if it isn't found
-    raise SystemExit(
-        "\033[0;31;40mOne or more library is missing! Check the list of libraries!\033[0;37;40m"
-    )
+    raise SystemExit("\033[0;31;40mOne or more library is missing! Check the list of libraries!\033[0;37;40m")
 
 
 def ListEpisodes(limit_real):
@@ -39,9 +37,7 @@ def ListEpisodes(limit_real):
     episode_title.append(data.get("title"))
     episode_number.append(colored(1, "cyan"))
 
-    for counter, data in enumerate(
-        soup.find_all("a", class_="btn btn-sm btn-default", limit=limit_real), start=2
-    ):
+    for counter, data in enumerate(soup.find_all("a", class_="btn btn-sm btn-default", limit=limit_real), start=2):
         episode_title.append(data.get("title"))
         episode_number.append(colored(counter, "cyan"))
 
@@ -66,20 +62,11 @@ def VideoSource(source):
 # It used to just void the output of MPV but since that was introduces half of the episdoes failed to play. Thats why its no longer voiding the MPV output
 def Play(DirectLink):
 
-    check = input(
-        colored(
-            "Do you want to play this video in browser(1), mpv(2), or fullscreen-mpv(3, default): ",
-            "cyan",
-        )
-    )
+    check = input(colored("Do you want to play this video in browser(1), mpv(2), or fullscreen-mpv(3, default): ", "cyan"))
 
     # This makes the link more human readable
     # First it only prints every character after the 34th and then just replaces ".mp4" and "-" with blank space
-    print(
-        colored("You are now watching:", "green"),
-        DirectLink[34:].replace(".mp4", "").replace("-", " "),
-        "\n",
-    )
+    print(colored("You are now watching:", "green"), DirectLink[34:].replace(".mp4", "").replace("-", " "), "\n")
 
     if check in ("1", "browser"):
         print(DirectLink)
@@ -90,12 +77,7 @@ def Play(DirectLink):
             subprocess.run(["mpv", DirectLink])
 
         except subprocess.CalledProcessError:
-            print(
-                colored(
-                    "\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.",
-                    "red",
-                )
-            )
+            print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.","red"))
 
     else:
 
@@ -103,30 +85,18 @@ def Play(DirectLink):
             subprocess.run(["mpv", "--fs", DirectLink])
 
         except subprocess.CalledProcessError:
-            print(
-                colored(
-                    "\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.",
-                    "red",
-                )
-            )
+            print(colored("\nAn error occured while tying to play the video! Make sure you have mpv or youtube-dl installed.", "red"))
 
 
 @Halo(text="Downloading episode.", spinner="shark", color="green")
 def Download(source):
     try:
-        subprocess.run(
-            ["youtube-dl", source], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
-        )
+        subprocess.run(["youtube-dl", source], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
         print(colored("\nDownload complete!", "green"))
 
     except ImportError or subprocess.CalledProcessError:
-        print(
-            colored(
-                "Downloading the video failed. Be sure to have youtube-dl installed.",
-                "red",
-            )
-        )
+        print(colored("Downloading the video failed. Be sure to have youtube-dl installed.", "red"))
 
 
 episodes = []
@@ -169,19 +139,12 @@ try:
             Download(VideoSource(episodes[args2 - 1]))
 
         except IndexError or ValueError:
-            print(
-                colored(
-                    "No arguments passed with download function or the index is out of range, aborting...!",
-                    "red",
-                )
-            )
+            print(colored("No arguments passed with download function or the index is out of range, aborting...!", "red",))
 
     # Dowload all
     elif args.replace(" ", "") in ["--download-all", "-da"]:
         try:
-            print(
-                colored(f"Downloading all fetched episodes : {len(episodes)}", "green")
-            )
+            print(colored(f"Downloading all fetched episodes : {len(episodes)}", "green"))
 
             for counter, x in enumerate(range(len(episodes))):
                 print(f"Downloading episode {colored(x+1, 'cyan')}")
@@ -239,12 +202,7 @@ try:
             )
 
     elif args.replace("  ", "") in ["--update", "-u"]:
-        print(
-            colored(
-                "This is higly experimental and only works if you have installed spongebob-cli with git clone command!",
-                "red",
-            )
-        )
+        print(colored("This is higly experimental and only works if you have installed spongebob-cli with git clone command!", "red"))
         sys.subprocess(["git", "fetch"])
 
     elif args.replace("  ", "") in ["--random", "-r"]:
@@ -270,16 +228,10 @@ try:
         while True:
             os.system("clear") if os.name == "posix" else os.system("cls")
             ListEpisodes(len(episodes))
-            print(
-                colored(
-                    "No arguments were passed. Default settings applied.\n", "green"
-                )
-            )
+            print(colored("No arguments were passed. Default settings applied.\n", "green"))
 
             try:
-                video_input = input(
-                    "What episode do you want to watch? (type a number by the right side or `q` to quit): "
-                ).replace(" ", "")
+                video_input = input("What episode do you want to watch? (type a number by the right side or `q` to quit): ").replace(" ", "")
                 video_input = int(video_input)
 
             except ValueError or AttributeError:
