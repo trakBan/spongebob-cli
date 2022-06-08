@@ -11,6 +11,9 @@ import time
 import webbrowser
 from urllib.error import HTTPError
 
+# local file, func.py
+from func import httperror_assess
+
 try:
     import requests
     from bs4 import BeautifulSoup
@@ -18,8 +21,6 @@ try:
     from prettytable import PrettyTable
     from termcolor import colored
 
-    # local file, func.py
-    from func import httperror_assess
 
 except ImportError or ModuleNotFoundError:
     # Using python color codes instead of termcolor if it isn't found
