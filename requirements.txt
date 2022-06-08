@@ -1,0 +1,5 @@
+requests==2.27.1
+beautifulsoup4==4.11.1
+halo==0.0.31
+prettytable==3.3.0
+termcolor==1.1.0
