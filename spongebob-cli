@@ -3,15 +3,15 @@
 
 # TODO: queee {1-10} this will play first to tenth episode |  queee {1 2 3} This will play first, second and third episode
 
-try:
-    import os
-    import random
-    import subprocess
-    import sys
-    import time
-    import webbrowser
-    from urllib.error import HTTPError
+import os
+import random
+import subprocess
+import sys
+import time
+import webbrowser
+from urllib.error import HTTPError
 
+try:
     import requests
     from bs4 import BeautifulSoup
     from halo import Halo
