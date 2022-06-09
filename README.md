@@ -59,7 +59,7 @@ You need to install mpv through a windows package manager
 
 ### If setup.py fails try this:
 ```bash
-pip3 install termcolor beautifulsoup4 prettytable halo
+pip install -r requirements.txt
 ```
 
 ### If you're getting an error like `sudo: python: command not found`
