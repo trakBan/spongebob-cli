@@ -19,7 +19,7 @@ git clone https://github.com/trakBan/spongebob-cli.git
 
 cd spongebob-cli
 chmod +x spongebob-cli
-python setup.py install
+sudo python setup.py install
 ```
 
 One line: 
