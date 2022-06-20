@@ -237,7 +237,8 @@ try:
 
             except ValueError or AttributeError:
                 if video_input in ["exit", "quit", "close", "q"]:
-                    raise SystemExit("Quitting the program!")
+                    print("Quitting the program!")
+                    raise SystemExit()
 
                 print(colored("You need to type a number!", "red"))
                 continue
@@ -252,4 +253,5 @@ try:
 
 
 except KeyboardInterrupt:
-    raise SystemExit(colored("\nUser interruped with the operation, aborting.", "red"))
+    print(colored("\nUser interruped with the operation, aborting.", "red"))
+    raise SystemExit()
