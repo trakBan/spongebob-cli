@@ -1,11 +1,12 @@
 # spongebob-cli
 Watch classic spongebob from the terminal!
-Thanks to everyone that is starring, forking, writing issues, pull requesting and just users of spongebob-cli!
+Thanks to everyone that is starring, forking, writing issues, pull requesting and just the users of spongebob-cli!
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/81049050/165950004-a21d0199-79b5-4ebe-b733-94df1fee918e.gif)
 
 ## Dependecies:
 - mpv player https://mpv.io/  (Must be installed through a package manager)
+- Every other dependendency will get automatticaly installed
 
 ## How to install:
 
@@ -13,7 +14,7 @@ Thanks to everyone that is starring, forking, writing issues, pull requesting an
 Checkout the source code with `git` or download it as a .zip file.
 ```bash
 
-#Sudo isn't required as long as you're in Root
+# Root is only required for the last line
 git clone https://github.com/trakBan/spongebob-cli.git
 
 cd spongebob-cli
@@ -58,7 +59,7 @@ You need to install mpv through a windows package manager
 
 ### If setup.py fails try this:
 ```bash
-pip3 install termcolor beautifulsoup4 prettytable halo
+pip install -r requirements.txt
 ```
 
 ### If you're getting an error like `sudo: python: command not found`
@@ -67,6 +68,7 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
 ```
 
 #### Gentoo users:
+Gentoo users have to add --user when they are installing with setup.py
 Run this instead:
 ```bash
 git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod +x spongebob-cli; python3 setup.py install --user
@@ -75,14 +77,15 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
 ### If the video won't play
 - Check if you have mpv and youtube-dl installed.
     - You can also install `youtube-dl` through your package manager if `setup.py` did not install it correctly
-- If you don't have youtube-dl but a fork of it, make a alias in your .zshrc or .bashrc for youtube-dl and direct it to your fork.
+- If you don't have youtube-dl but a fork of it, make an alias in your ~./bashrc file and alias it to youtube-dl
 
 ## Rewrite in rust!
  [Ali-TM-original ](https://github.com/Ali-TM-original) Made [spongebob-cli in rust](https://github.com/Ali-TM-original/SpongbobCli-Rust)
  
 ## Contributors
-[yaacornus](https://github.com/yaacornus), 
-[redouane](https://github.com/red-elka), 
-[totensee](https://github.com/totensee), 
-[Kat](https://github.com/TransKat), 
-[dev-nolant](https://github.com/dev-nolant)
+Feel free to add yourself in if you contributed to the project.
+<div align="center">
+	<a href="https://github.com/trakBan/spongebob-cli/graphs/contributors">
+  	<img src="https://contrib.rocks/image?repo=trakBan/spongebob-cli" />
+	</a>
+</div>
