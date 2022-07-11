@@ -33,7 +33,6 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
  --download | -d, usage --download {a number of a episode}, This will download that video under a directory the command was run.
  --download-all | -da, usage --download-all, This will download every spongebob video it scrapes.
  --binge | -b , usage spongebob-cli --binge, This is used to start the first episode and play until the last episode.
- --list | -l,     usage --list, this will list all the episodes and then exit the program.
  --list | -l, usage --list {number} this will show the number of episodes with the limit you provided.
  --play | -p      usage --play {a number of a episode}, This will play the episode without listing the episodes.
  --random | -r, usage spongebob-cli --random, This will play a random episode.
@@ -48,6 +47,9 @@ yay -S spongebob-cli-git
 ```
 ## Windows
 You need to install mpv through a windows package manager
+
+## Uninstall
+If you want to uninstall spongebob-cli run ```uninstall.sh``` with root, this will delete spongebob-cli from ```/usr/bin```.
 
 ## Package Status
 [![Packaging status](https://repology.org/badge/vertical-allrepos/spongebob-cli.svg)](https://repology.org/project/spongebob-cli/versions)
@@ -83,7 +85,6 @@ git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod 
  [Ali-TM-original ](https://github.com/Ali-TM-original) Made [spongebob-cli in rust](https://github.com/Ali-TM-original/SpongbobCli-Rust)
  
 ## Contributors
-Feel free to add yourself in if you contributed to the project.
 <div align="center">
 	<a href="https://github.com/trakBan/spongebob-cli/graphs/contributors">
   	<img src="https://contrib.rocks/image?repo=trakBan/spongebob-cli" />
