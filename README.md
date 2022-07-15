@@ -24,7 +24,7 @@ sudo python setup.py install
 
 One line: 
 ```bash
-git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod +x spongebob-cli; sudo python setup.py install
+git clone https://github.com/trakBan/spongebob-cli.git && cd spongebob-cli && chmod +x spongebob-cli && sudo python setup.py install
 ```
 
 ## Usage
