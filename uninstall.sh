@@ -7,4 +7,4 @@ fi
 # Deletes spongebob-cli from /usr/bin/
 rm /usr/bin/spongebob-cli
 
-ipfetch || echo "spongebob-cli has been sucesfully uninstalled."
+spongebob-cli || echo "spongebob-cli has been sucesfully uninstalled."
