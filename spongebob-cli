@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+import argparse
+import requests
+from prettytable import PrettyTable
+from bs4 import BeautifulSoup
+from os import system
+
+
+LINK: str = "https://www.megacartoons.net/help-wanted/"
+response: str = requests.get(LINK).text
+soup = BeautifulSoup(response, "html.parser")
+
+
+def getVideos() -> list[str, ...]:
+    #Gets the list of all videos urls
+    data = soup.find("a", class_="btn btn-sm btn-default series-current")
+
+    episodes: list[str, ...] = []
+    for data in soup.find_all("a", class_="btn btn-sm btn-default"):
+        episodes.append(data.get("href"))
+
+    return episodes
+
+
+def listVideos(episodes: list[str, ...]) -> None:
+    # Displays episode titles with numbers using PrettyTable
+    episodesTitles: list[str, ...] = [] 
+    episodesNumbers: list[int, ...] = [x for x in range(len(episodes))]
+
+    for episode in episodes:
+        # Should probably be done with regex instead of list splicing
+        episodesTitles.append(episode.split("/")[-2].replace("-", " ").title())
+
+    table = PrettyTable()
+    table.add_column("Number", episodesNumbers)
+    table.add_column("Episodes", episodesTitles)
+
+    print(table)
+
+
+def videoSource(source: str) -> str:
+    # Gets the direct mp4 link
+    response: str = requests.get(source).text
+    soupRelative = BeautifulSoup(response, "html.parser")
+
+    return soupRelative.find("input", {"name": "main_video_url"})["value"]
+
+
+def parseArgs():
+    # Parsing arguments
+    parser = argparse.ArgumentParser(
+                prog = 'spongebob-cli',
+                description = 'Watch classic spongebob from the terminal!'
+            )
+
+    return parser.parse_args()
+
+
+def playVideo(episode) -> None:
+    system(f"mpv {episode}")
+
+
+def userInput() -> int:
+    # Takes input from the user
+    try:
+        user = int(input("What episode do you want to watch?: "))
+    except ValueError:
+        print("Error")
+
+    return user
+
+
+def main() -> None:
+    episodesUrls: list[str, ...] = getVideos()
+    listVideos(episodesUrls)
+    video = (videoSource(episodesUrls[userInput()]))
+    playVideo(video)
+
+
+if __name__ == "__main__":
+    args = parseArgs()
+    main()
