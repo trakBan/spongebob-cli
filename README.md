@@ -1,7 +1,12 @@
 # Refactored branch
 This branch will slowly replace main branch
 
-# Usage
+## Download
+```
+git clone -b refactored https://github.com/trakBan/spongebob-cli.git
+```
+
+## Usage
 ```
 usage: spongebob-cli [-h] [-p PLAY] [-l] [-r]
 
