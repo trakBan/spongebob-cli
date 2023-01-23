@@ -52,22 +52,12 @@ def videoSource(source: str) -> str:
     return soupRelative.find("input", {"name": "main_video_url"})["value"]
 
 
-def parseArgs():
-    # Parsing arguments
-    parser = argparse.ArgumentParser(
-                prog = 'spongebob-cli',
-                description = 'Watch classic spongebob from the terminal!'
-            )
-
-    return parser.parse_args()
-
-
 def playVideo(episode) -> None:
     system(f"mpv {episode}")
 
 
 def userInput() -> int:
-    # Takes input from the user
+    # Takes input from user
     try:
         user = int(input("What episode do you want to watch?: "))
     except ValueError:
@@ -77,14 +67,35 @@ def userInput() -> int:
     return user
 
 
-def main() -> None:
+def parseArgs():
+    # Parsing arguments
+    parser = argparse.ArgumentParser(
+                prog = 'spongebob-cli',
+                description = 'Watch classic spongebob from the terminal!'
+            )
+
+    parser.add_argument("--play", "-p", type=int, choices=range(0, 338))
+    parser.add_argument("--list", "-l", action="store_true", default=False)
+
+    return parser.parse_args()
+
+
+def main(args) -> None:
+    # Main
+    episodesUrls: list[str, ...] = getVideos()
 
     # if arguments were passed
     if argv[1:] != []:
-        ... # Parse args
+        if args.play != None:
+            video = videoSource(episodesUrls[args.play])
+            playVideo(video)
+            raise SystemExit
+
+        if args.list:
+            listVideos(episodesUrls)
+            raise SystemExit
 
     # if no arguments were passed run all
-    episodesUrls: list[str, ...] = getVideos()
     listVideos(episodesUrls)
     video = (videoSource(episodesUrls[userInput()]))
     playVideo(video)
@@ -92,4 +103,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     args = parseArgs()
-    main()
+    #print(args.type())
+    main(args)
