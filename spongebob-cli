@@ -5,7 +5,7 @@ from prettytable import PrettyTable
 from bs4 import BeautifulSoup
 from os import system
 from sys import argv
-
+from random import choice
 
 LINK: str = "https://www.megacartoons.net/help-wanted/"
 response: str = requests.get(LINK)
@@ -76,24 +76,30 @@ def parseArgs():
 
     parser.add_argument("-p", "--play", type=int, help="play the wanted episode without any user interaction")
     parser.add_argument("-l", "--list", action="store_true", default=False, help="list episodes and quit")
+    parser.add_argument("-r", "--random", action="store_true", default=False, help="play random episode and quit")
 
     return parser.parse_args()
 
 
 def main(args) -> None:
-    # Main
+    # Main program
     episodesUrls: list[str, ...] = getVideos()
 
     # if arguments were passed
     if argv[1:] != []:
+
         if args.play != None:
             video = videoSource(episodesUrls[args.play])
             playVideo(video)
-            raise SystemExit
 
-        if args.list:
+        elif args.list:
             listVideos(episodesUrls)
-            raise SystemExit
+
+        elif args.random:
+            video = (videoSource(episodesUrls[choice(range(0, len(episodesUrls)))]))
+            playVideo(video)
+        
+        raise SystemExit
 
     # if no arguments were passed run all
     listVideos(episodesUrls)
