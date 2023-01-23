@@ -74,8 +74,8 @@ def parseArgs():
                 description = 'Watch classic spongebob from the terminal!'
             )
 
-    parser.add_argument("--play", "-p", type=int)
-    parser.add_argument("--list", "-l", action="store_true", default=False)
+    parser.add_argument("-p", "--play", type=int, help="play the wanted episode without any user interaction")
+    parser.add_argument("-l", "--list", action="store_true", default=False, help="list episodes and quit")
 
     return parser.parse_args()
 
