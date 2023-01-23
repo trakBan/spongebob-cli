@@ -4,11 +4,17 @@ import requests
 from prettytable import PrettyTable
 from bs4 import BeautifulSoup
 from os import system
+from sys import argv
 
 
 LINK: str = "https://www.megacartoons.net/help-wanted/"
-response: str = requests.get(LINK).text
-soup = BeautifulSoup(response, "html.parser")
+response: str = requests.get(LINK)
+
+if response.status_code != 200:
+    print(f"Error while trying to connect to the website '{response.status_code}'")
+    raise SystemExit
+
+soup = BeautifulSoup(response.text, "html.parser")
 
 
 def getVideos() -> list[str, ...]:
@@ -66,11 +72,18 @@ def userInput() -> int:
         user = int(input("What episode do you want to watch?: "))
     except ValueError:
         print("Error")
+        raise SystemExit
 
     return user
 
 
 def main() -> None:
+
+    # if arguments were passed
+    if argv[1:] != []:
+        ... # Parse args
+
+    # if no arguments were passed run all
     episodesUrls: list[str, ...] = getVideos()
     listVideos(episodesUrls)
     video = (videoSource(episodesUrls[userInput()]))
