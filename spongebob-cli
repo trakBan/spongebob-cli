@@ -82,6 +82,7 @@ def parseArgs():
     parser.add_argument("-l", "--list", action="store_true", default=False, help="list episodes and quit")
     parser.add_argument("-r", "--random", action="store_true", default=False, help="play random episode and quit")
     parser.add_argument("-d", "--download", type=int, help="download the wanted episode")
+    parser.add_argument("-da", "--download-all", action="store_true", default=False)
 
     return parser.parse_args()
 
@@ -101,14 +102,20 @@ def main(args) -> None:
             video = videoSource(episodesUrls[args.download])
             downloadVideo(video)
 
-        elif args.list:
-            listVideos(episodesUrls)
-
         elif args.random:
             video = (videoSource(episodesUrls[choice(range(0, len(episodesUrls)))]))
             playVideo(video)
 
-        
+        elif args.download_all:
+            for x in episodesUrls:
+                video = videoSource(x)
+                downloadVideo(video)
+                system("clear")
+                print(f"Episode: {x} downloaded {episodesUrls.index(x)}/{len(episodesUrls)}")
+
+        elif args.list:
+            listVideos(episodesUrls)
+
         raise SystemExit
 
     # if no arguments were passed run all
