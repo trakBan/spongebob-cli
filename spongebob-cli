@@ -52,8 +52,12 @@ def videoSource(source: str) -> str:
     return soupRelative.find("input", {"name": "main_video_url"})["value"]
 
 
-def playVideo(episode) -> None:
+def playVideo(episode: str) -> None:
     system(f"mpv {episode}")
+
+
+def downloadVideo(episode: str) -> None:
+    system(f"wget --show-progress {episode}")
 
 
 def userInput() -> int:
@@ -74,9 +78,10 @@ def parseArgs():
                 description = 'Watch classic spongebob from the terminal!'
             )
 
-    parser.add_argument("-p", "--play", type=int, help="play the wanted episode without any user interaction")
+    parser.add_argument("-p", "--play", type=int,help="play the wanted episode without any user interaction")
     parser.add_argument("-l", "--list", action="store_true", default=False, help="list episodes and quit")
     parser.add_argument("-r", "--random", action="store_true", default=False, help="play random episode and quit")
+    parser.add_argument("-d", "--download", type=int, help="download the wanted episode")
 
     return parser.parse_args()
 
@@ -92,12 +97,17 @@ def main(args) -> None:
             video = videoSource(episodesUrls[args.play])
             playVideo(video)
 
+        elif args.download != None:
+            video = videoSource(episodesUrls[args.download])
+            downloadVideo(video)
+
         elif args.list:
             listVideos(episodesUrls)
 
         elif args.random:
             video = (videoSource(episodesUrls[choice(range(0, len(episodesUrls)))]))
             playVideo(video)
+
         
         raise SystemExit
 
