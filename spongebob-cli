@@ -22,7 +22,7 @@ soup = BeautifulSoup(response.text, "html.parser")
 def getVideos() -> list[str, ...]:
     #Gets the list of all videos urls
 
-    episodes: list[str, ...] = []
+    episodes: list[str, ...] = [LINK]
     for data in soup.find_all("a", class_="btn btn-sm btn-default"):
         episodes.append(data.get("href"))
 
@@ -60,9 +60,9 @@ def playVideo(episode: str, player: str) -> None:
     system(f"{player} {episode}")
 
 
-def downloadVideo(episode: str) -> None:
+def downloadVideo(episode: str, downloader: str) -> None:
     # Downloads the video
-    system(f"wget --show-progress {episode}")
+    system(f"{downloader} {episode}")
 
 
 def userInput() -> int:
