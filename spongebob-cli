@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
+
+from os import system
+from random import choice
+from sys import argv
+
 import argparse
 import requests
 from prettytable import PrettyTable
 from bs4 import BeautifulSoup
-from os import system
-from sys import argv
-from random import choice
 
 LINK: str = "https://www.megacartoons.net/help-wanted/"
 response: str = requests.get(LINK)
@@ -19,7 +21,6 @@ soup = BeautifulSoup(response.text, "html.parser")
 
 def getVideos() -> list[str, ...]:
     #Gets the list of all videos urls
-    data = soup.find("a", class_="btn btn-sm btn-default series-current")
 
     episodes: list[str, ...] = []
     for data in soup.find_all("a", class_="btn btn-sm btn-default"):
@@ -30,6 +31,7 @@ def getVideos() -> list[str, ...]:
 
 def listVideos(episodes: list[str, ...]) -> None:
     # Displays episode titles with numbers using PrettyTable
+
     episodesTitles: list[str, ...] = [] 
     episodesNumbers: list[int, ...] = [x for x in range(len(episodes))]
 
@@ -46,17 +48,20 @@ def listVideos(episodes: list[str, ...]) -> None:
 
 def videoSource(source: str) -> str:
     # Gets the direct mp4 link
+
     response: str = requests.get(source).text
     soupRelative = BeautifulSoup(response, "html.parser")
 
     return soupRelative.find("input", {"name": "main_video_url"})["value"]
 
 
-def playVideo(episode: str) -> None:
-    system(f"mpv {episode}")
+def playVideo(episode: str, player: str) -> None:
+    # Plays the video
+    system(f"{player} {episode}")
 
 
 def downloadVideo(episode: str) -> None:
+    # Downloads the video
     system(f"wget --show-progress {episode}")
 
 
@@ -73,6 +78,7 @@ def userInput() -> int:
 
 def parseArgs():
     # Parsing arguments
+
     parser = argparse.ArgumentParser(
                 prog = 'spongebob-cli',
                 description = 'Watch classic spongebob from the terminal!'
@@ -84,6 +90,9 @@ def parseArgs():
     parser.add_argument("-d", "--download", type=int, help="download the wanted episode")
     parser.add_argument("-da", "--download-all", action="store_true", default=False, help="download all episodes")
     parser.add_argument("-b", "--binge", action="store_true", default=False, help="play every video")
+
+    parser.add_argument("-vp", "--video-player", type=str, default="mpv", help="use another video player [default=mpv]")
+    parser.add_argument("-vd", "--video-downloader", type=str, default="wget", help="use another video downloadr [default=wget]")
 
     return parser.parse_args()
 
@@ -97,26 +106,26 @@ def main(args) -> None:
 
         if args.play != None:
             video = videoSource(episodesUrls[args.play])
-            playVideo(video)
+            playVideo(video, args.video_player)
 
         elif args.download != None:
             video = videoSource(episodesUrls[args.download])
-            downloadVideo(video)
+            downloadVideo(video, args.video_downloader)
 
         elif args.random:
             video = (videoSource(episodesUrls[choice(range(0, len(episodesUrls)))]))
-            playVideo(video)
+            playVideo(video, args.video_player)
 
         elif args.binge:
             for x in episodesUrls:
                 video = videoSource(x)
-                playVideo(video)
+                playVideo(video, args.video_player)
 
         elif args.download_all:
             for x in episodesUrls:
                 print(f"Episode: {x} downloaded {episodesUrls.index(x)}/{len(episodesUrls)}")
                 video = videoSource(x)
-                downloadVideo(video)
+                downloadVideo(video, args.video_downloader)
                 system("clear")
 
         elif args.list:
@@ -127,10 +136,9 @@ def main(args) -> None:
     # if no arguments were passed run all
     listVideos(episodesUrls)
     video = (videoSource(episodesUrls[userInput()]))
-    playVideo(video)
+    playVideo(video, args.video_player)
 
 
 if __name__ == "__main__":
     args = parseArgs()
-    #print(args.type())
     main(args)
