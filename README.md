@@ -1,14 +1,34 @@
-# Refactored branch
-This branch will slowly replace main branch
+# spongebob-cli
+Watch classic spongebob from the terminal!
 
-## Download
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/81049050/165950004-a21d0199-79b5-4ebe-b733-94df1fee918e.gif)
+
+## How to install:
+
+### For UNIX based OS - One Line Execution
+Checkout the source code with `git` or download it as a .zip file.
+```bash
+
+# Root is only required for the last line
+git clone https://github.com/trakBan/spongebob-cli.git
+
+cd spongebob-cli
+chmod +x spongebob-cli
+sudo python setup.py install
 ```
-git clone -b refactored https://github.com/trakBan/spongebob-cli.git
+
+One line: 
+```bash
+git clone https://github.com/trakBan/spongebob-cli.git && cd spongebob-cli && chmod +x spongebob-cli && sudo python setup.py install
 ```
+## External programs
+  Video player (required) mpv is default, check ```help``` for specifying another video player
+  Downloader (optional) wget is default, check ```help``` for specifying another downloader 
+
 
 ## Usage
 ```
-usage: spongebob-cli [-h] [-p PLAY] [-l] [-r] [-d DOWNLOAD] [-da] [-b] [-vp VIDEO_PLAYER] [-vd VIDEO_DOWNLOADER]
+ usage: spongebob-cli [-h] [-p PLAY] [-l] [-r] [-d DOWNLOAD] [-da] [-b] [-vp VIDEO_PLAYER] [-vd VIDEO_DOWNLOADER]
 
 Watch classic spongebob from the terminal!
 
@@ -27,5 +47,19 @@ options:
                         use another video downloadr [default=wget]
 ```
 
-# spongebob-cli
-Watch classic spongebob from the terminal!
+#### Gentoo users:
+Gentoo users have to add --user when they are installing with setup.py
+Run this instead:
+```bash
+git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod +x spongebob-cli; python3 setup.py install --user
+```
+
+### Rewrite in rust!
+ [Ali-TM-original ](https://github.com/Ali-TM-original) Made [spongebob-cli in rust](https://github.com/Ali-TM-original/SpongbobCli-Rust)
+ 
+## Contributors
+<div align="center">
+	<a href="https://github.com/trakBan/spongebob-cli/graphs/contributors">
+  	<img src="https://contrib.rocks/image?repo=trakBan/spongebob-cli" />
+	</a>
+</div>
