@@ -9,11 +9,19 @@ import requests
 from prettytable import PrettyTable
 from bs4 import BeautifulSoup
 
+class Colors:
+    # ANSII color codes
+    RED = "\033[0;31m"
+    GREEN = "\033[0;32m"
+    CYAN = "\033[0;36m"
+    END = "\033[0m"
+
+
 LINK: str = "https://www.megacartoons.net/help-wanted/"
 response: str = requests.get(LINK)
 
 if response.status_code != 200:
-    print(f"Error while trying to connect to the website '{response.status_code}'")
+    print(f"{Colors.RED}Error while trying to connect to the website{Colors.END}, error code: {response.status_code}")
     raise SystemExit
 
 soup = BeautifulSoup(response.text, "html.parser")
@@ -33,15 +41,16 @@ def listVideos(episodes: list[str, ...]) -> None:
     # Displays episode titles with numbers using PrettyTable
 
     episodesTitles: list[str, ...] = [] 
-    episodesNumbers: list[int, ...] = [x for x in range(len(episodes))]
+    episodesNumbers: list[int, ...] = [
+        f'{Colors.CYAN}{x}{Colors.END}' for x in [x for x in range(len(episodes))]]
 
     for episode in episodes:
         # Should probably be done with regex instead of list splicing
         episodesTitles.append(episode.split("/")[-2].replace("-", " ").title())
 
     table = PrettyTable()
-    table.add_column("Number", episodesNumbers)
     table.add_column("Episodes", episodesTitles)
+    table.add_column("Number", episodesNumbers)
 
     print(table)
 
@@ -57,6 +66,9 @@ def videoSource(source: str) -> str:
 
 def playVideo(episode: str, player: str) -> None:
     # Plays the video
+
+    episodeTitle: str = episode.split("/")[-1].replace("-", " ").replace(".mp4", "")
+    print(f"{Colors.GREEN}Currently playing{Colors.END}: {episodeTitle}")
     system(f"{player} {episode}")
 
 
@@ -67,10 +79,11 @@ def downloadVideo(episode: str, downloader: str) -> None:
 
 def userInput() -> int:
     # Takes input from user
+    
     try:
         user = int(input("What episode do you want to watch?: "))
     except ValueError:
-        print("Error")
+        print(f"{Colors.RED}You need to input a number{Colors.END}")
         raise SystemExit
 
     return user
@@ -81,18 +94,33 @@ def parseArgs():
 
     parser = argparse.ArgumentParser(
                 prog = 'spongebob-cli',
-                description = 'Watch classic spongebob from the terminal!'
+                description = 'Watch classic spongebob from the terminal!',
             )
 
-    parser.add_argument("-p", "--play", type=int,help="play the wanted episode without any user interaction")
-    parser.add_argument("-l", "--list", action="store_true", default=False, help="list episodes and quit")
-    parser.add_argument("-r", "--random", action="store_true", default=False, help="play random episode and quit")
-    parser.add_argument("-d", "--download", type=int, help="download the wanted episode")
-    parser.add_argument("-da", "--download-all", action="store_true", default=False, help="download all episodes")
-    parser.add_argument("-b", "--binge", action="store_true", default=False, help="play every video")
+    parser.add_argument("-p", "--play", type=int,
+        help="play the wanted episode without any user interaction")
 
-    parser.add_argument("-vp", "--video-player", type=str, default="mpv", help="use another video player [default=mpv]")
-    parser.add_argument("-vd", "--video-downloader", type=str, default="wget", help="use another video downloadr [default=wget]")
+    parser.add_argument("-l", "--list", action="store_true", default=False, 
+        help="list episodes and quit")
+
+    parser.add_argument("-r", "--random", action="store_true", default=False,
+        help="play random episode and quit")
+
+    parser.add_argument("-d", "--download", type=int, 
+        help="download the wanted episode")
+
+    parser.add_argument("-da", "--download-all", action="store_true", default=False,
+        help="download all episodes")
+
+    parser.add_argument("-b", "--binge", action="store_true", default=False,
+        help="play every video")
+
+    parser.add_argument("-vp", "--video-player", type=str, default="mpv", 
+        help="use another video player [default=mpv],")
+
+    parser.add_argument("-vd", "--video-downloader", type=str, default="wget", 
+        help="use another video downloadr [default=wget]")
+
 
     return parser.parse_args()
 
