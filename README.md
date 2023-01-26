@@ -27,8 +27,8 @@ options:
 ## How to install:
 
 ## External programs
-  Video player (required) mpv is default, check ```help``` for specifying another video player
-  Downloader (optional) wget is default, check ```help``` for specifying another downloader 
+  - Video player (required) mpv is default, check ```help``` for specifying another video player
+  - Downloader (optional) wget is default, check ```help``` for specifying another downloader 
 
 ### For UNIX based OS - One Line Execution
 Checkout the source code with `git` or download it as a .zip file.
@@ -45,13 +45,6 @@ sudo python setup.py install
 One line: 
 ```bash
 git clone https://github.com/trakBan/spongebob-cli.git && cd spongebob-cli && chmod +x spongebob-cli && sudo python setup.py install
-```
-
-#### Gentoo users:
-Gentoo users have to add --user when they are installing with setup.py
-Run this instead:
-```bash
-git clone https://github.com/trakBan/spongebob-cli.git; cd spongebob-cli; chmod +x spongebob-cli; python3 setup.py install --user
 ```
 
 ### Rewrite in rust!
