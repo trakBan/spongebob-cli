@@ -3,29 +3,6 @@ Watch classic spongebob from the terminal!
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/81049050/165950004-a21d0199-79b5-4ebe-b733-94df1fee918e.gif)
 
-## How to install:
-
-### For UNIX based OS - One Line Execution
-Checkout the source code with `git` or download it as a .zip file.
-```bash
-
-# Root is only required for the last line
-git clone https://github.com/trakBan/spongebob-cli.git
-
-cd spongebob-cli
-chmod +x spongebob-cli
-sudo python setup.py install
-```
-
-One line: 
-```bash
-git clone https://github.com/trakBan/spongebob-cli.git && cd spongebob-cli && chmod +x spongebob-cli && sudo python setup.py install
-```
-## External programs
-  Video player (required) mpv is default, check ```help``` for specifying another video player
-  Downloader (optional) wget is default, check ```help``` for specifying another downloader 
-
-
 ## Usage
 ```
  usage: spongebob-cli [-h] [-p PLAY] [-l] [-r] [-d DOWNLOAD] [-da] [-b] [-vp VIDEO_PLAYER] [-vd VIDEO_DOWNLOADER]
@@ -45,6 +22,29 @@ options:
                         use another video player [default=mpv]
   -vd VIDEO_DOWNLOADER, --video-downloader VIDEO_DOWNLOADER
                         use another video downloadr [default=wget]
+```
+
+## How to install:
+
+## External programs
+  Video player (required) mpv is default, check ```help``` for specifying another video player
+  Downloader (optional) wget is default, check ```help``` for specifying another downloader 
+
+### For UNIX based OS - One Line Execution
+Checkout the source code with `git` or download it as a .zip file.
+```bash
+
+# Root is only required for the last line
+git clone https://github.com/trakBan/spongebob-cli.git
+
+cd spongebob-cli
+chmod +x spongebob-cli
+sudo python setup.py install
+```
+
+One line: 
+```bash
+git clone https://github.com/trakBan/spongebob-cli.git && cd spongebob-cli && chmod +x spongebob-cli && sudo python setup.py install
 ```
 
 #### Gentoo users:
