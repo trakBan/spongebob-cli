@@ -47,6 +47,9 @@ One line:
 git clone https://github.com/trakBan/spongebob-cli.git && cd spongebob-cli && chmod +x spongebob-cli && sudo python setup.py install
 ```
 
+#### Uninstall
+Run ```uninstall.sh``` as root
+
 ### Rewrite in rust!
  [Ali-TM-original ](https://github.com/Ali-TM-original) Made [spongebob-cli in rust](https://github.com/Ali-TM-original/SpongbobCli-Rust)
  
