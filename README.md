@@ -1,4 +1,6 @@
-# spongebob-cli
+# Legacy branch
+
+## spongebob-cli
 Watch classic spongebob from the terminal!
 Thanks to everyone that is starring, forking, writing issues, pull requesting and just the users of spongebob-cli!
 
