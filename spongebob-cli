@@ -147,18 +147,26 @@ def main(args) -> None:
             video = videoSource(episodesUrls[args.play])
             playVideo(video, args.video_player)
 
+            raise SystemExit
+
         elif args.download != None:
             video = videoSource(episodesUrls[args.download])
             downloadVideo(video, args.video_downloader)
+
+            raise SystemExit
 
         elif args.random:
             video = videoSource(episodesUrls[choice(range(0, len(episodesUrls)))])
             playVideo(video, args.video_player)
 
+            raise SystemExit
+
         elif args.binge:
             for x in episodesUrls:
                 video = videoSource(x)
                 playVideo(video, args.video_player)
+
+            raise SystemExit
 
         elif args.download_all:
             for x in episodesUrls:
@@ -169,10 +177,11 @@ def main(args) -> None:
                 downloadVideo(video, args.video_downloader)
                 system("clear")
 
+            raise SystemExit
+
         elif args.list:
             listVideos(episodesUrls)
-
-        raise SystemExit
+            raise SystemExit
 
     # if no arguments were passed run all
     listVideos(episodesUrls)
