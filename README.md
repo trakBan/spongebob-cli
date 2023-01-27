@@ -1,7 +1,7 @@
 # spongebob-cli
 Watch classic spongebob from the terminal!
 
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/81049050/165950004-a21d0199-79b5-4ebe-b733-94df1fee918e.gif)
+![2023-01-27 23-06-12](https://user-images.githubusercontent.com/81049050/215212951-8363cf2c-5c65-4e47-a55d-86110bdc0aa2.gif)
 
 ## Usage
 ```
