@@ -47,6 +47,11 @@ One line:
 git clone https://github.com/trakBan/spongebob-cli.git && cd spongebob-cli && chmod +x spongebob-cli && sudo python setup.py install
 ```
 
+Using pip:
+```bash
+pip install "spongebob-cli @ git+https://github.com/trakBan/spongebob-cli@main"
+```
+
 #### Uninstall
 Run ```uninstall.sh``` as root
 
