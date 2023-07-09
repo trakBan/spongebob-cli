@@ -3,6 +3,7 @@
 from os import system
 from random import choice
 from sys import argv
+from re import search
 
 import argparse
 import requests
@@ -16,18 +17,6 @@ class Colors:
     GREEN = "\033[0;32m"
     CYAN = "\033[0;36m"
     END = "\033[0m"
-
-
-LINK: str = "https://www.megacartoons.net/help-wanted/"
-response: str = requests.get(LINK)
-
-if response.status_code != 200:
-    print(
-        f"{Colors.RED}Error while trying to connect to the website{Colors.END}, error code: {response.status_code}"
-    )
-    raise SystemExit
-
-soup = BeautifulSoup(response.text, "html.parser")
 
 
 def getVideos() -> list[str, ...]:
@@ -49,8 +38,9 @@ def listVideos(episodes: list[str, ...]) -> None:
     ]
 
     for episode in episodes:
-        # Should probably be done with regex instead of list splicing
-        episodesTitles.append(episode.split("/")[-2].replace("-", " ").title())
+        episodesTitles.append(
+            search(r"https://www\.megacartoons\.net/(.*?)/", episode
+            ).group(1).replace("-", " ").title())
 
     table = PrettyTable()
     table.add_column("Episodes", episodesTitles)
@@ -70,8 +60,8 @@ def videoSource(source: str) -> str:
 
 def playVideo(episode: str, player: str) -> None:
     # Plays the video
-
-    episodeTitle: str = episode.split("/")[-1].replace("-", " ").replace(".mp4", "")
+    
+    episodeTitle: str = search(r"https://ww\.megacartoons\.net/video/(.*?)\.mp4", episode).group(1).replace("-", " ")
     print(f"{Colors.GREEN}Currently playing{Colors.END}: {episodeTitle}")
     system(f"{player} {episode}")
 
@@ -190,5 +180,16 @@ def main(args) -> None:
 
 
 if __name__ == "__main__":
+    LINK: str = "https://www.megacartoons.net/help-wanted/"
+    response: str = requests.get(LINK)
+
+    if response.status_code != 200:
+        print(
+            f"{Colors.RED}Error while trying to connect to the website{Colors.END}, error code: {response.status_code}"
+        )
+        raise SystemExit
+
+    soup = BeautifulSoup(response.text, "html.parser")
+
     args = parseArgs()
     main(args)
