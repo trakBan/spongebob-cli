@@ -3,7 +3,7 @@
 from os import system
 from random import choice
 from sys import argv
-from re import search
+from re import search, match
 
 import argparse
 import requests
@@ -38,9 +38,7 @@ def listVideos(episodes: list[str, ...]) -> None:
     ]
 
     for episode in episodes:
-        episodesTitles.append(
-            search(r"https://www\.megacartoons\.net/(.*?)/", episode
-            ).group(1).replace("-", " ").title())
+        episodesTitles.append(episode.split("/")[-2].replace("-", " ").title())
 
     table = PrettyTable()
     table.add_column("Episodes", episodesTitles)
@@ -131,32 +129,35 @@ def main(args) -> None:
     episodesUrls: list[str, ...] = getVideos()
 
     # if arguments were passed
-    if argv[1:] != []:
+    if argv[1:] == []:
+        # if no arguments were passed run all
+        listVideos(episodesUrls)
+        video = videoSource(episodesUrls[userInput()])
+        playVideo(video, args.video_player)
+
+
+    else:
 
         if args.play != None:
             video = videoSource(episodesUrls[args.play])
             playVideo(video, args.video_player)
 
-            raise SystemExit
 
         elif args.download != None:
             video = videoSource(episodesUrls[args.download])
             downloadVideo(video, args.video_downloader)
 
-            raise SystemExit
 
         elif args.random:
             video = videoSource(episodesUrls[choice(range(0, len(episodesUrls)))])
             playVideo(video, args.video_player)
 
-            raise SystemExit
 
         elif args.binge:
             for x in episodesUrls:
                 video = videoSource(x)
                 playVideo(video, args.video_player)
 
-            raise SystemExit
 
         elif args.download_all:
             for x in episodesUrls:
@@ -167,16 +168,9 @@ def main(args) -> None:
                 downloadVideo(video, args.video_downloader)
                 system("clear")
 
-            raise SystemExit
 
         elif args.list:
             listVideos(episodesUrls)
-            raise SystemExit
-
-    # if no arguments were passed run all
-    listVideos(episodesUrls)
-    video = videoSource(episodesUrls[userInput()])
-    playVideo(video, args.video_player)
 
 
 if __name__ == "__main__":
