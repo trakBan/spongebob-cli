@@ -22,9 +22,16 @@ class Colors:
 def getVideos() -> list[str, ...]:
     # Gets the list of all videos urls
 
-    episodes: list[str, ...] = [LINK]
-    for data in soup.find_all("a", class_="btn btn-sm btn-default"):
-        episodes.append(data.get("href"))
+    episodes: list[str, ...] = []
+
+    # website uses ajax to dynamicly load the episodeds, making it impossible to load everythign with one url
+    # temporary fix for now
+    for link in links[:3]:
+        response = requests.get(link)
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        for data in soup.find_all("div", {"class": "item-thumbnail"}):
+            episodes.append(data.find("a", href=True)["href"])  
 
     return episodes
 
@@ -59,8 +66,7 @@ def videoSource(source: str) -> str:
 def playVideo(episode: str, player: str) -> None:
     # Plays the video
     
-    episodeTitle: str = search(r"https://ww\.megacartoons\.net/video/(.*?)\.mp4", episode).group(1).replace("-", " ")
-    print(f"{Colors.GREEN}Currently playing{Colors.END}: {episodeTitle}")
+    print(f"{Colors.GREEN}Currently playing{Colors.END}: {episode}")
     system(f"{player} {episode}")
 
 
@@ -174,16 +180,10 @@ def main(args) -> None:
 
 
 if __name__ == "__main__":
-    LINK: str = "https://www.megacartoons.net/help-wanted/"
-    response: str = requests.get(LINK)
-
-    if response.status_code != 200:
-        print(
-            f"{Colors.RED}Error while trying to connect to the website{Colors.END}, error code: {response.status_code}"
-        )
-        raise SystemExit
-
-    soup = BeautifulSoup(response.text, "html.parser")
+    links: list[str] = []
+    for num in range(1, 17):
+        links.append(f"https://www.megacartoons.net/video-serie/spongebob-squarepants/page/{num}/")
 
     args = parseArgs()
     main(args)
+
